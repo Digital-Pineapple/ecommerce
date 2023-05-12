@@ -11,7 +11,7 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { helpers } from "../../helpers";
 import { clearCart } from "../../actions/shoppingCartActions";
 
-export const CheckoutTransfer = ({ handleOpenTransfer, setLoadingForm }) => {
+export const CheckoutTransfer = ({ handleOpenTransfer, setLoadingForm, cart }) => {
 
     const dispatch = useDispatch();
 
@@ -38,7 +38,8 @@ export const CheckoutTransfer = ({ handleOpenTransfer, setLoadingForm }) => {
         const token = Cookies.get('token');
         const currency = Cookies.get('Currency') || 'MXN';
         if (banksAccounts.length > 1)
-            await dispatch(startfinaliceTransferCheckout(bankAccountSelected?._id, token, currency));
+
+            await dispatch(startfinaliceTransferCheckout(bankAccountSelected?._id, token, currency,cart));
         // console.log(bankAccountSelected._id)
         else
             await dispatch(startfinaliceTransferCheckout(banksAccounts[0]?._id, token, currency));

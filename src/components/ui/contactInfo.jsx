@@ -1,6 +1,6 @@
 
 
-export const ContactInfo = ({icon , title , text}) =>{
+export const ContactInfo = ({icon , title , text, phonetwo}) =>{
     return (
         <div className="w-full flex flex-wrap pb-[42px] items-center">
                          <span className="w-[60px] text-[#222] text-center text-lg">
@@ -14,6 +14,9 @@ export const ContactInfo = ({icon , title , text}) =>{
                            <span className="font-Poppins text-lg leading-[1.2] text-[#333]">{title}</span>
                            <p className="max-w-[245px] font-Poppins text-[15px] leading-[1.666] text-[#888]">
                              {text}
+                           </p>
+                           <p className="max-w-[245px] font-Poppins text-[15px] leading-[1.666] text-[#888]">
+                             {phonetwo}
                            </p>
                          </div>
         </div>

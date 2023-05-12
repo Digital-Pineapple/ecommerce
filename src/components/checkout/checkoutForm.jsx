@@ -2,8 +2,9 @@ import { CircularProgress } from "@mui/material";
 import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import * as ga from '../../libs/ga/index';
 
-export const CheckoutForm = ({ setLoadingForm }) => {
+export const CheckoutForm = ({ setLoadingForm, cart }) => {
 
   const stripe = useStripe();
   const elements = useElements();
@@ -60,6 +61,9 @@ export const CheckoutForm = ({ setLoadingForm }) => {
     setIsLoading(true);
     const { error } = await stripe.confirmPayment({
       elements,
+      tagManager: {
+      return : ga.onCheckoutFinalize(cart, 'stripe')
+      },
       confirmParams: {
         // Make sure to change this to your payment completion page
         return_url: origin + '/perfil/mis-pedidos'

@@ -17,6 +17,7 @@ import { CircularProgress } from '@mui/material';
 import Image from 'next/image';
 import { useEffect } from 'react';
 
+import * as ga from '../../libs/ga/index';
 export const ProductCard = memo(({ product }) => {
 
   const { logged } = useSelector((state) => state.auth);
@@ -38,6 +39,7 @@ export const ProductCard = memo(({ product }) => {
 
   const handleShowProduct = () => {
     history.push(`/productos/${url}`);
+    ga.click(product);
   };
  
   const handleToogleWishList = (_id) => {

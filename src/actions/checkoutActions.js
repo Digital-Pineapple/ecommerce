@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 import { types } from "../types";
 import axios from "axios";
 import { errorNotify } from "../helpers/helpers";
-
+import * as ga from '../libs/ga/index';
 export const startLoadClientSecret = (token) => {
     return async (dispatch, getState) => {
 
@@ -61,7 +61,7 @@ export const loadBanksAccounts = (banksAccounts) => ({
     payload: banksAccounts
 });
 
-export const startfinaliceTransferCheckout = (bank_account_id, token, currency, successTransfer) => {
+export const startfinaliceTransferCheckout = (bank_account_id, token, currency, successTransfer,cart) => {
     return async (dispatch, getState) => {
         const { order_id } = getState().cart;
         const typeOrder = Cookies.get('typeOrder');
@@ -79,6 +79,7 @@ export const startfinaliceTransferCheckout = (bank_account_id, token, currency, 
                 }
             });
             dispatch(finaliceTransferCheckout());
+            ga.onCheckoutFinalize(cart, 'transfer');
         } catch (error) {
             console.log(error);
         }

@@ -8,7 +8,7 @@ import { warningNotify, notify, successNotify } from '../helpers/helpers';
 import { useDebounce } from './useDebounce';
 
 import Cookies from 'js-cookie';
-
+import * as ga from '../libs/ga/index';
 const INCREASE = 1;
 const DECREASE = 2;
 const CHANGE = 3;
@@ -79,25 +79,30 @@ export const useCart = (logged = false, currentQuantity = 1, product = {}, cart,
     }
 
     const removeProduct = () => {
-        if (logged) return dispatch(startRemoveProductShoppingCart(product._id));
-        dispatch(startRemoveProductsShoppingCartNotLogged(product._id));
+       
+        if (logged) return dispatch(startRemoveProductShoppingCart(product._id), ga.removeCart(product,quantity));
+        
+        dispatch(startRemoveProductsShoppingCartNotLogged(product._id),ga.removeCart(product,quantity));
     }
 
 
     const addProduct = async () => {
-
+        
         try {
             setLoading(true);
             if (logged) {
+               
                 await dispatch(startAddProductShoppingCart({ product_id: product._id, quantity: quantity || 1 }, product, isAdd));
+                 ga.addCart(product, currency, {quantity: quantity || 1}); 
                 return setProductInCart(true);
             }
 
             let newCart = [];
             const product_id = await prepareCartDataForLocalStorage(product);
-
+           
             await dispatch(addProductToShoppingCart({ product_id, quantity: quantity || 1 }));
-            setProductInCart(true);
+            ga.addCart(product, currency, {quantity: quantity || 1}); 
+            setProductInCart(true); 
             if (!productInCart) {
                 newCart = [...cart, { product_id, quantity: quantity || 1 }];
             }
@@ -105,6 +110,7 @@ export const useCart = (logged = false, currentQuantity = 1, product = {}, cart,
                 newCart = cart.map(cart => cart.product_id._id === product._id ? { ...cart, quantity: cart.quantity = quantity || 1 } : cart);
             }
             localStorage.setItem('cart', JSON.stringify(newCart));
+           
             if (!isAdd) successNotify('El producto ha sido agregado al carrito satisfactoriamente');
 
         } catch (error) {

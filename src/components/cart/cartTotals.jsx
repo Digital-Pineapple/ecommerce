@@ -10,6 +10,7 @@ import { errorNotify } from "../../helpers/helpers"
 import GavelIcon from '@mui/icons-material/Gavel';
 import LoadingScreen from "../LoadingScreen"
 
+import * as ga from '../../libs/ga/index';
 export const CartTotals = ({ toggleBusinessRule, toggleSelectCountry }) => {
 
   const dispatch = useDispatch();
@@ -80,7 +81,7 @@ export const CartTotals = ({ toggleBusinessRule, toggleSelectCountry }) => {
 
 
     const isValid = await dispatch(startFinaliceSaleCheckout(data));
-    if (!isValid) return setLoading(false);
+    if (!isValid) return setLoading(false); ga.onCheckout(cart); 
     router.push('/checkout')
     setLoading(false);
   }

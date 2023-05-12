@@ -167,6 +167,7 @@ const ContactUs = () => {
                   icon={<LocalPhoneIcon />}
                   title="Hablemos"
                   text="+52 (729 322 2418)"
+                  phonetwo="+52 (729 322 2418)"
                 />
 
                 <ContactInfo

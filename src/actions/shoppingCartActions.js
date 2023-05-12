@@ -57,6 +57,7 @@ export const startAddProductShoppingCart = (data, product, isAdd) => {
             }
          });
          dispatch(addProductToShoppingCart({ product_id: product, quantity: data.quantity }));
+         
          if (!isAdd) successNotify('El producto ha sido agregado al carrito satisfactoriamente');
       } catch (error) {
          console.log(error);

@@ -29,9 +29,10 @@ const Checkout = () => {
 
   const dispatch = useDispatch();
   const router = useRouter();
-  const { superTotal } = useSelector((state) => state.cart);
+  const { superTotal} = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.cart);
   const { dimensions } = useSelector((state) => state.ui);
-  const { client_secret, bankAccountSelected, success } = useSelector((state) => state.checkout);
+  const { client_secret, bankAccountSelected, success} = useSelector((state) => state.checkout);
   const [isTransfer, setIsTransfer] = useState(false);
   const [openTransfer, toggleTransfer] = useToggle();
   const [loadingForm, setLoadingForm] = useState(false);
@@ -187,6 +188,7 @@ const Checkout = () => {
                       <Elements options={options} stripe={stripePromise}>
                         <CheckoutForm
                           loadingForm={loadingForm}
+                          cart={ cart}
                           setLoadingForm={setLoadingForm}
                         />
                       </Elements>
@@ -211,7 +213,8 @@ const Checkout = () => {
             >
               <CheckoutTransfer 
                 setLoadingForm = {setLoadingForm}
-                handleOpenTransfer={handleOpenTransfer}
+                handleOpenTransfer={handleOpenTransfer} 
+                cart={ cart}
               />
 
             </Modal>
