@@ -12,7 +12,7 @@ import VerticalAlignTopIcon from '@mui/icons-material/VerticalAlignTop';
 
 export const OrderProductsList = ({ product, handleOpenUploadImages, status, order_id, canvasStatus }) => {
 
-    const { product_id: productList, quantity, subtotalInCurrency, subtotal, product: dataProduct } = product;
+    const { product_id: productList, quantity, subtotalInCurrency, subtotal, product: dataProduct, canvas_multimedia } = product;
     const subtotalProduct = helpers.priceFormat(subtotalInCurrency || subtotal);
 
     return (
@@ -43,7 +43,7 @@ export const OrderProductsList = ({ product, handleOpenUploadImages, status, ord
                             </p>
                             <div className="flex pb-5 pt-1">
                                 {
-                                    !canvasStatus && status === 2 && dataProduct.product_type === '2' && (
+                                    !canvasStatus && status === 2 && dataProduct.product_type === '2' && canvas_multimedia.length > 0 &&(
                                         <span
                                             className="bg-white flex items-center shadow-lg rounded-md hover:bg-gray-100 cursor-pointer"
                                             onClick={() => handleOpenUploadImages(product, order_id)}

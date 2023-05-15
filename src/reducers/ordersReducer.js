@@ -5,7 +5,7 @@ const initialState = {
     canceledOrders: [],
     approvedOrders: [],
     shippedOrders: [],
-    payments:[],
+    payments: [],
     order_id: '',
     totalOrder: 0,
     totalPayments: 0,
@@ -46,6 +46,20 @@ export const ordersReducer = (state = initialState, { type, payload }) => {
                     ? { ...order }
                     : { ...orderDetail })
             }
+
+        case types.cancel_invoice: {
+            const { order } = payload;
+            return order.orderStatus == 3 ? {
+                ...state,
+                shippedOrders: state.shippedOrders.map(shippedOrder => shippedOrder._id === order._id ? order : { ...shippedOrder })
+            }: {
+                ...state,
+                approvedOrders: state.approvedOrders.map(approvedOrder => approvedOrder._id === order._id ? order : { ...approvedOrder })
+            }
+                 
+        }
+
+
         case types.loadOrdersCanceled:
             return {
                 ...state,
@@ -71,19 +85,19 @@ export const ordersReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 orderDetail: payload.order,
                 shippingDetail: payload?.shipping,
-                payments:payload?.payments,
+                payments: payload?.payments,
             }
 
         case types.invoiced_order: {
 
-            const { first_order, second_order, status } = payload;
+            const { first_order } = payload;
 
-            return first_order ? {
+            return first_order.orderStatus == 3 ? {
                 ...state,
-                success: true,
-            } : {
+                shippedOrders: state.shippedOrders.map(shippedOrder => shippedOrder._id === first_order._id ? first_order : { ...shippedOrder })
+            }: {
                 ...state,
-                success: false,
+                approvedOrders: state.approvedOrders.map(approvedOrder => approvedOrder._id === first_order._id ? first_order : { ...approvedOrder })
             }
 
         }

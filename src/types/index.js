@@ -142,6 +142,7 @@ export const types = {
     upload_proof_payment_order: '[ORDERS] upload proof payment order',
     // cancel_order: '[ORDERS] cancel orders',
     cancel_order_by_id: '[ORDERS] cancel order by id',
+    cancel_invoice: '[ORDERS] cancel invoice',
     invoiced_order: '[ORDER] invoiced order',
     start_load_reviews: '[REVIEWS] start load reviews',
     load_product_detail: '[ORDERS] load product detail',

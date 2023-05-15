@@ -67,7 +67,7 @@ export const getStaticProps = wrapper.getStaticProps(
         await store.dispatch(startLoadCurrencies());
         await store.dispatch(startLoadAdministrableLogo());
         return {
-            revalidate: false
+            revalidate: true
         }
     }
 );

@@ -28,6 +28,8 @@ const Show = () => {
   const router = useRouter();
   const { product, relatedProducts } = useSelector((state) => state.products);
 
+  console.log(product)
+
   const { cart } = useSelector((state) => state.cart);
   const { logged } = useSelector((state) => state.auth);
 

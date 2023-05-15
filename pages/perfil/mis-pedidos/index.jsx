@@ -9,7 +9,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { startLoadFaqsCategories } from "../../../src/actions/faqsActions";
 
 import { startLoadAdministrableLogo } from '../../../src/actions/administrableActions';
-import { selectedOrderPendding, startLoadOrdersCanceled, startLoadPendingOrders, startLoadOrdersApproved, startLoadOrdersShipped, shippedOrders, loadProductDetail, getOrderId } from "../../../src/actions/ordersActions";
+import { selectedOrderPendding, startLoadOrdersCanceled, startLoadPendingOrders, startLoadOrdersApproved, startLoadOrdersShipped, 
+  shippedOrders, loadProductDetail, getOrderId } from "../../../src/actions/ordersActions";
 
 {/** Custom Hooks */ }
 import { useToggle } from "../../../src/hooks/useToggle";
@@ -39,6 +40,7 @@ import LoadingScreen from "../../../src/components/LoadingScreen";
 import ProductDetail from "../../../src/components/orders/ProductDetail";
 import UploadImages from "../../../src/components/orders/UploadImages";
 import { startLoadCurrencies } from "../../../src/actions/countryAcctions";
+import { startLoadFiscalAddress } from "../../../src/actions/profileActions";
 
 
 function a11yProps(index) {
@@ -464,6 +466,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) =>
     await store.dispatch(startLoadOrdersCanceled(ctx.req.cookies.token));
     await store.dispatch(startLoadOrdersApproved(ctx.req.cookies.token));
     await store.dispatch(startLoadOrdersShipped(ctx.req.cookies.token));
+    await store.dispatch(startLoadFiscalAddress(ctx.req.cookies.token));
     await store.dispatch(startLoadCurrencies());
   })
 

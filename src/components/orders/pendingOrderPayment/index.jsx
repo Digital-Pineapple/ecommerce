@@ -8,7 +8,7 @@ import moment from "moment";
 import { useToggle } from "../../../hooks/useToggle";
 import { Modal } from "../../ui/modal";
 import { useDispatch, useSelector } from "react-redux";
-import { startCancelOrderByID, startGetOrder, startOrderCancel } from "../../../actions/ordersActions";
+import { startCancelInvoice, startCancelOrderByID, startGetOrder, startOrderCancel } from "../../../actions/ordersActions";
 
 import { OrderDetails } from "./orderDetail";
 import Swal from "sweetalert2";
@@ -18,12 +18,18 @@ import { useRouter } from "next/router";
 import OrderStatus from "../OrderStatus";
 import OrderCancelStatus from "../OrderCancelStatus";
 
+import * as Yup from 'yup';
+import { useFormik } from "formik";
+
 import CircularProgress from '@mui/material/CircularProgress';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import VerticalAlignCenterIcon from '@mui/icons-material/VerticalAlignCenter';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+
+import subjectsCancelInvoice from '../../../staticData/SubjectCancelInvoice.json';
 
 export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, status, loading, setLoading, handleOpenProductDetail, handleOpenUploadImages }) => {
   const router = useRouter();
@@ -37,7 +43,9 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
   const [open, toggle] = useToggle();
   const [openOrderDetail, toggleOrderDetail] = useToggle();
   const [openBankAccountDetail, toggleBankAccountDetail] = useToggle();
-  // const [openCancelSOrder, toggleCancelOrder] = useToggle();
+  const [openCancelSOrder, toggleCancelOrder] = useToggle();
+
+  const [orderId, setOrderId] = useState('');
 
   const [loadingDetail, setLoadingDetail] = useState(false);
 
@@ -79,46 +87,42 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
     });
   }
 
+  const sendCancelOrder = async (formData, resetForm) => {
+    toggleCancelOrder();
+    Swal.fire({
+      title: "¿Deseas cancelar tu factura?",
+      text: "Tu solicitud será revisada por nosotros antes de cancelarce por completo.",
+      icon: "question",
+      showCancelButton: true,
+      cancelButtonText: 'Cancelar!',
+      cancelButtonColor: "#b71c1c",
+      confirmButtonText: "Continuar",
+      confirmButtonColor: "#1976d2",
+      reverseButtons: true
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await dispatch(startCancelInvoice(formData, orderId));
+        resetForm({ values: initialValues });
+      }
+    })
+  }
 
-  // const sendCancelOrder = async (formData, resetForm) => {
-  //   // toggleCancelOrder();
-  //   // Swal.fire({
-  //   //   title: "¿Deseas Cancelar este pedido?",
-  //   //   text: "El pedido será revisado por nosotros antes de cancelarce por completo.",
-  //   //   icon: "question",
-  //   //   showCancelButton: true,
-  //   //   cancelButtonText: 'Cancelar!',
-  //   //   cancelButtonColor: "#b71c1c",
-  //   //   confirmButtonText: "Continuar",
-  //   //   confirmButtonColor: "#1976d2",
-  //   //   reverseButtons: true
-  //   // }).then(async (result) => {
-  //   //   if (result.isConfirmed) {
-  //   //     await dispatch(startOrderCancel(formData, order._id));
-  //   //     resetForm({ values: initialValues });
-  //   //   }
-  //   // })
-  // }
+  const initialValues = {
+    motive: '',
+    order_id: '',
+  }
 
-  // const initialValues = {
-  //   subject: '',
-  //   description: '',
-  // }
+  const validationSchema = {
+    motive: Yup.string().required("El motivo es requerido"),
+  }
 
-  // const validationSchema = {
-  //   subject: Yup.string().min(8, "El nombre debe contener al menos 8 caracteres").required("El nombre es requerido"),
-  //   description: Yup.string().required("El correo es requerido"),
-  // }
-
-  // const formik = useFormik({
-  //   initialValues,
-  //   validationSchema: Yup.object(validationSchema),
-  //   onSubmit: (formData, { resetForm }) => {
-  //     sendCancelOrder(formData, resetForm)
-  //     //alert(JSON.stringify(formData));
-  //     // resetForm({ values: initialValues })
-  //   }
-  // });
+  const formik = useFormik({
+    initialValues,
+    validationSchema: Yup.object(validationSchema),
+    onSubmit: (formData, { resetForm }) => {
+      sendCancelOrder(formData, resetForm)
+    }
+  });
 
   const handleClickInvoicedOrder = (order_id, status) => {
     if (Object.keys(fiscalAddress) < 1) {
@@ -208,24 +212,32 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
               <div className="text-center">
                 <span className="text-sm text-[#333]">Pedido N.º {order.folio}</span>
                 <div className="w-full mr-6 text-[#1976d2]">
-                  {/* {
-                      order.invoiced && status !== 0 && status !== 1 && (
+                  {
+                    order.invoiced && status !== 0 && status !== 1 && (
+                      !order?.request_invoice_canceled ? (
                         <button
                           className="text-sm  cursor-pointer border-b-3 text-[#e91e63]  hover:border-solid hover:text-[#880e4f] hover:transition-all mr-5"
-                        // onClick={() => handleCancelInvoice()}
+                          onClick={() => { toggleCancelOrder(); setOrderId(order._id) }}
                         >
-                          Pedido facturado
+                          Cancelar factura
+                        </button>
+                      ) : (
+                        <button
+                          className="text-sm  cursor-pointer border-b-3 text-[#e91e63]  hover:border-solid hover:text-[#880e4f] hover:transition-all mr-5"
+                        >
+                          Factura en proceso de cancelación
                         </button>
                       )
-                    }
-                    {
-                      (!order.invoiced) && status !== 0 && status !== 1 &&
-                      <button className="text-sm  cursor-pointer border-b-3  text-[#e91e63] hover:border-solid hover:text-[#880e4f] hover:transition-all mr-5"
-                        onClick={() => handleClickInvoicedOrder(order._id, status)}
-                      >
-                        Factura CFDI
-                      </button>
-                    } */}
+                    )
+                  }
+                  {
+                    (!order.invoiced) && status !== 0 && status !== 1 &&
+                    <button className="text-sm  cursor-pointer border-b-3  text-[#e91e63] hover:border-solid hover:text-[#880e4f] hover:transition-all mr-5"
+                      onClick={() => handleClickInvoicedOrder(order._id, status)}
+                    >
+                      Factura CFDI
+                    </button>
+                  }
                   <button
                     className="pr-1 text-sm cursor-pointer text-[#e91e63] hover:border-3 hover:border-solid hover:text-[#880e4f] hover:transition-all"
                     onClick={() => handleClickOrder(order._id)}
@@ -426,56 +438,44 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
           <span className="text-base text-[#888] font-medium capitalize">{order?.bank_account_id?.interbank}</span>
         </div>
       </Modal>
-      {/* <Modal
-          title="Cancelar Pedido"
-          open={openCancelSOrder}
-          handleOpenCheckout={toggleCancelOrder}
-          actions={false}
-          fullWidth={true}
-          maxWidth={'sm'}
-          className="font-Poppins"
-        >
-          <form onSubmit={formik.handleSubmit}>
-            <div className="upload-area__header py-5">
-              <p className="text-[0.9rem] text-[#888]">
-                Escribe el motivo de tu cancelación y sera revisada por nosotros
-              </p>
-            </div>
-            <TextField
-              name="subject"
-              error={formik.touched.subject && formik.errors.subject ? true : false}
-              helperText={
-                formik.touched.subject && formik.errors.subject ?
-                  formik.errors.subject : ""
-              }
-              fullWidth={true}
-              size="large"
-              id="outlined-required"
-              label="Asunto"
+      <Modal
+        title="Cancelar Factura"
+        open={openCancelSOrder}
+        handleOpenCheckout={toggleCancelOrder}
+        actions={false}
+        fullWidth={true}
+        maxWidth={'sm'}
+        className="font-Poppins"
+      >
+        <form onSubmit={formik.handleSubmit}>
+          <div className="upload-area__header py-5">
+            <p className="text-[0.9rem] text-[#888]">
+              Selecciona el motivo de tu cancelación
+            </p>
+          </div>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Motivo</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Motivo"
+              required={true}
+              name="motive"
               onChange={formik.handleChange}
-              value={formik.values.subject}
-            />
-            <TextareaAutosize
-              aria-label="empty textarea"
-              className="input"
-              placeholder="Descripción"
-              name="description"
-              onChange={formik.handleChange}
-              value={formik.values.description}
-              onBlur={formik.handleBlur}
-              minRows={10}
-              error={formik.touched.description && formik.errors.description ? true : false}
-              helperText={
-                formik.touched.description && formik.errors.description ?
-                  formik.errors.description : ""
+              value={formik.values.motive}
+            >
+              {
+                subjectsCancelInvoice.map(({ _id, error }) => (
+                  <MenuItem key={_id} value={_id}>{error}</MenuItem>
+                ))
               }
-              style={{ width: '100%', marginTop: 20, marginBottom: 20, padding: 10, resize: "none", border: 'solid 1px', borderColor: "#ccc" }}
-            />
-            <button className="w-full px-2 py-4 bg-[#222] text-white hover:bg-[#333]" type="submit">
-              Enviar
-            </button>
-          </form>
-        </Modal> */}
+            </Select>
+          </FormControl>
+          <button className="w-full px-2 py-4 bg-[#222] text-white hover:bg-[#333] mt-10" type="submit">
+            Enviar
+          </button>
+        </form>
+      </Modal>
     </div>
   )
 }
