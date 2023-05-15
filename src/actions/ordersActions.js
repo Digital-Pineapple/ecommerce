@@ -161,6 +161,35 @@ export const orderCancel = (order_id, order) => ({
   },
 });
 
+export const startCancelInvoice = (formData, order_id) => {
+  return async (dispatch) => {
+    try {
+      let url = `/orders/invoice/request-cancel/${order_id}`;
+      const token = Cookies.get("token");
+      const { data } = await client.post(url, formData, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      dispatch(cancelInvoice(data.order));
+      successNotify(data.message);
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        errorNotify(error?.response?.data?.message);
+        return;
+      }
+      errorNotify("No se pudo cancelar la order - Intenta mas tarder");
+    }
+  };
+};
+
+const cancelInvoice = (order) =>({
+  type: types.cancel_invoice,
+  payload: {
+    order
+  }
+});
+
 export const startGetOrder = (_id, token) => {
   return async (dispatch) => {
     try {
@@ -248,7 +277,7 @@ export const startCancelOrderByID = (order_id) => {
 
       Swal.fire({
         title: "Vaya ... Hubo un error",
-        text: "Parece que hubo un error - Intenta más tarde",
+        text: error.message,
         icon: "error",
       });
     }

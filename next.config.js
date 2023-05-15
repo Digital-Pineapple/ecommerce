@@ -10,6 +10,7 @@ module.exports = {
       'cdn.pngsumo.com',
       'cdn.wapizima.com',
       'encrypted-tbn0.gstatic.com',
+      'cloud.wapizima.com'
     ],
     deviceSizes: [400, 750, 828, 1000, 1400],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],

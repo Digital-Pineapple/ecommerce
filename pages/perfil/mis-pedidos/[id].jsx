@@ -167,9 +167,8 @@ const ShowOrder = () => {
                                             <td className="py-4 px-6">
                                                 <span className="font-semibold text-gray-600">{helpers.priceFormat(product.totalInCurrency)}</span>
                                             </td>
-
                                             {
-                                                !orderDetail.canvasStatus && product.product_type === '2' && (
+                                                product.product.product_type === '2' && product.canvas_multimedia.length && !product.canvasStatus ? (
                                                     <td>
                                                         <span
                                                             className="bg-white w-6/12 flex items-center shadow-lg rounded-md hover:bg-gray-100 cursor-pointer"
@@ -179,7 +178,7 @@ const ShowOrder = () => {
                                                             <VerticalAlignTopIcon className="text-xs text-green-500" />
                                                         </span>
                                                     </td>
-                                                )
+                                                ): null
                                             }
                                         </tr>
                                     ))

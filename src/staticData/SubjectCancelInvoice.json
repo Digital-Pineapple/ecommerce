@@ -1,0 +1,18 @@
+[
+    {
+        "_id": "01",
+        "error": "Errores con relación"
+    },
+    {
+        "_id": "02",
+        "error": "Errores sin relación"
+    },
+    {
+        "_id": "03",
+        "error": "No se llevo a cabo la operación"
+    },
+    {
+        "_id": "04",
+        "error": "Operación nominativa, relacionada en una factura global"
+    }
+]
