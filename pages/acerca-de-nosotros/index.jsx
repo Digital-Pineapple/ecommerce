@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import {
-  startLoadAdministrableAbout,
-  startLoadAdministrableLogo,
-} from "../../src/actions/administrableActions";
+import { startLoadAdministrableAbout, startLoadAdministrableLogo } from "../../src/actions/administrableActions";
 import Layout from "../../src/components/Layouts";
 import { BannerImage } from "../../src/components/ui";
 import { wrapper } from "../../src/store";
@@ -11,6 +8,7 @@ import { startLoadFaqsCategories } from "../../src/actions/faqsActions";
 import { startLoadCurrencies } from "../../src/actions/countryAcctions";
 
 const AboutPage = () => {
+
   const { aboutUs, mission } = useSelector((state) => state.administrable);
 
   return (
@@ -37,6 +35,7 @@ const AboutPage = () => {
                 width={100}
                 height={100}
                 alt="acerca de nosotros"
+                layout="responsive"
               />
             </div>
           </div>
@@ -48,6 +47,7 @@ const AboutPage = () => {
                 width={100}
                 height={100}
                 alt="acerca de nosotros"
+                layout="responsive"
               />
             </div>
             <div className="col-span-2">
@@ -56,10 +56,7 @@ const AboutPage = () => {
                   Nuestra Misión
                 </span>
               </div>
-              <div
-                className="font-Poppins text-sm leading-7 text-[#888] pb-6"
-                dangerouslySetInnerHTML={{ __html: mission.mission }}
-              ></div>
+              <div className="font-Poppins text-sm leading-7 text-[#888] pb-6" dangerouslySetInnerHTML={{ __html: mission.mission }}></div>
             </div>
             <div className="block lg:hidden">
               <img
@@ -68,6 +65,7 @@ const AboutPage = () => {
                 width={100}
                 height={100}
                 alt="acerca de nosotros"
+                layout="responsive"
               />
             </div>
           </div>
