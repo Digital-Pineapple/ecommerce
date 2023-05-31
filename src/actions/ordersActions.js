@@ -199,7 +199,7 @@ export const startGetOrder = (_id, token) => {
           Authorization: token,
         },
       });
-      dispatch(getOrder(data.order, data?.shipping, data?.payments ?? []));
+      dispatch(getOrder(data.order, data?.shipping, data?.payments ?? []), console.log(data));
       return true;
     } catch (error) {
       console.log(error);

@@ -108,7 +108,7 @@ export const onCheckoutFinalize = (cart,checkoutOption )=> {
       'actionField': {
       'id': cart.order_id,
       'subtotal':cart.superTotal.subtotal,
-      'discountBusinessRule':cart.business_rule.discount,
+      'discountBusinessRule':cart.business_rule?.discount,
       'coupon': cart.coupon,
       'subtotalWithCoupon': cart.subtotalWithCoupon,
       'shipping': cart.finalShippingCosts,

@@ -31,7 +31,7 @@ const ShowOrder = () => {
     const [openUploadImages, toggleUploadImages] = useToggle();
 
     const { orderDetail, shippingDetail, payments } = useSelector(state => state.orders);
-
+console.log(shippingDetail);
     const handleOpenUploadImages = (product, order_id) => {
         toggleUploadImages();
         dispatch(loadProductDetail(product))
@@ -94,19 +94,22 @@ const ShowOrder = () => {
                     </div>
                 </div>
                 {
-                    shippingDetail?.no_guide && (
-                        <div>
+                    shippingDetail && (
+                        shippingDetail.map((shipping) => (
+                            <div>
                             <div className="text-sm md:text-base mb-10 mt-3 flex items-center">
                                 <div className="w-6/12">
                                     <p className="font-semibold">Paquetería:</p>
-                                    <p className="text-gray-600">{shippingDetail?.shipment_id?.name || 'No disponible'}</p>
+                                    <p className="text-gray-600">{shipping?.shipment_id?.name || 'No disponible'}</p>
                                 </div>
                                 <div className="w-6/12">
                                     <p className="font-bold">No. Guía:</p>
-                                    <p className="text-gray-600">{shippingDetail?.no_guide || 'No disponible'}</p>
+                                    <p className="text-gray-600">{shipping?.no_guide || 'No disponible'}</p>
                                 </div>
                             </div>
                         </div>
+                        ))
+                        
                     )
                 }
                 <div className="overflow-x-hidden">

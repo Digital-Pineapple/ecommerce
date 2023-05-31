@@ -44,7 +44,6 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
   const [openOrderDetail, toggleOrderDetail] = useToggle();
   const [openBankAccountDetail, toggleBankAccountDetail] = useToggle();
   const [openCancelSOrder, toggleCancelOrder] = useToggle();
-
   const [orderId, setOrderId] = useState('');
 
   const [loadingDetail, setLoadingDetail] = useState(false);
@@ -255,7 +254,7 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
                     )
                   }
                   {
-                    status === 3 && order.shipping?.no_guide && (
+                    status === 3 && order.shippings && (
                       <button
                         className="pl-1 text-sm cursor-pointer text-[#e91e63] hover:border-3 hover:border-solid hover:text-[#880e4f] hover:transition-all"
                         onClick={toggleOrderDetail}
@@ -404,7 +403,7 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
               <CircularProgress />
             </div>
             :
-            <OrderDetails status={status} shipping={order.shipping} />
+            <OrderDetails status={status} shippings={order.shippings} />
         }
       </Modal>
       <Modal
