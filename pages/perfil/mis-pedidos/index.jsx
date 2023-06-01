@@ -78,7 +78,7 @@ const MisPedidos = () => {
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { penddingOrders, canceledOrders, approvedOrders, shippedOrders, success } = useSelector((state) => state.orders);
+  const { penddingOrders, canceledOrders, approvedOrders, shippedOrders, success, changemethod } = useSelector((state) => state.orders);
 
   const { categories } = useSelector((state) => state.faqs)
 
@@ -86,6 +86,7 @@ const MisPedidos = () => {
     const token = Cookies.get('token')
     await dispatch(startLoadOrdersApproved(token));
     await dispatch(startLoadOrdersShipped(token));
+    await dispatch(startLoadPendingOrders(token));
   }
 
   useEffect(() => {
@@ -95,6 +96,7 @@ const MisPedidos = () => {
   }, [success]);
 
   useEffect(() => {
+    reloadData();
     if (router.query.redirect_status === 'succeeded' || router.query.successTransfer === 'true') {
       Cookies.remove("client_secret");
       Swal.fire({
@@ -105,6 +107,7 @@ const MisPedidos = () => {
         cancelButtonColor: "#1565c0",
         allowOutsideClick: false,
       }).then(() => {
+        
         router.push(
           {
             pathname: router.path,
@@ -298,6 +301,7 @@ const MisPedidos = () => {
                   <PendingPaymentOrderIndex
                     key={order._id}
                     order={order}
+                    changemethod={changemethod}
                     handleOpenProofOfPayment={handleOpenProofOfPayment}
                     openProofOfPayment={openProofOfPayment}
                     status={0}

@@ -13,6 +13,7 @@ const initialState = {
     shippingDetail: {},
     success: false,
     productDetail: {},
+    changemethod:{}
 }
 
 
@@ -125,6 +126,11 @@ export const ordersReducer = (state = initialState, { type, payload }) => {
                 ...state,
                 approvedOrders: state.approvedOrders.map(order => order._id === payload._id ? { ...payload } : order)
             }
+        case types.changed_payment_method:
+                return {
+                    ...state,
+                    changemethod: payload
+                }
 
         case types.start_send_images_to_canvas:
             return {

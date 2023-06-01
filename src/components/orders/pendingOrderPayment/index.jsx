@@ -8,7 +8,7 @@ import moment from "moment";
 import { useToggle } from "../../../hooks/useToggle";
 import { Modal } from "../../ui/modal";
 import { useDispatch, useSelector } from "react-redux";
-import { startCancelInvoice, startCancelOrderByID, startGetOrder, startOrderCancel } from "../../../actions/ordersActions";
+import { startCancelInvoice, startCancelOrderByID, startGetOrder, startOrderCancel, getChangePaymenMethod } from "../../../actions/ordersActions";
 
 import { OrderDetails } from "./orderDetail";
 import Swal from "sweetalert2";
@@ -24,32 +24,39 @@ import { useFormik } from "formik";
 import CircularProgress from '@mui/material/CircularProgress';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import VerticalAlignCenterIcon from '@mui/icons-material/VerticalAlignCenter';
+import CreditCardIcon from '@mui/icons-material/CreditCard';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 
 import subjectsCancelInvoice from '../../../staticData/SubjectCancelInvoice.json';
-
-export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, status, loading, setLoading, handleOpenProductDetail, handleOpenUploadImages }) => {
+import { CheckoutChangeMethod } from "../../checkout/checkoutChangeMethod";
+export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, status, loading, setLoading, handleOpenProductDetail, handleOpenUploadImages, changemethod }) => {
   const router = useRouter();
 
   const dispatch = useDispatch();
 
-  const { fiscalAddress } = useSelector((state) => state.profile)
+  const { fiscalAddress } = useSelector((state) => state.profile);
   const total = helpers.priceFormat(order?.totalCurrency || order.total, order?.currency?.currency || 'MXN');
   const totalPayments = helpers.priceFormat(order.total_payments);
   const date = moment(order.createdAt).format('DD/MM/YYYY');
   const [open, toggle] = useToggle();
   const [openOrderDetail, toggleOrderDetail] = useToggle();
+  const [openChangeMethod, toggleChangeMethod] = useToggle();
   const [openBankAccountDetail, toggleBankAccountDetail] = useToggle();
   const [openCancelSOrder, toggleCancelOrder] = useToggle();
   const [orderId, setOrderId] = useState('');
-
   const [loadingDetail, setLoadingDetail] = useState(false);
+
 
   const handleClickAddress = () => {
     toggle();
+  }
+
+  const handleClickchangePaymentMethod = async () => {
+    await dispatch(getChangePaymenMethod(order._id));
+    toggleChangeMethod();
   }
 
   const handleCancelOrder = (order_id) => {
@@ -330,14 +337,21 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
           }
           {
             status === 0 && order.total_payments < order.totalCurrency && !order.cancelation &&
-            <button className="bg-[#FFD814] font-Poppins text-[#333] py-[10px] px-[15px] uppercase text-sm mt-5 flex items-center justify-center w-full"
-              onClick={() => { handleOpenProofOfPayment(order._id, order.total, order.total_payments) }}
+            <><button className="bg-[#FFD814] font-Poppins text-[#333] py-[10px] px-[15px] uppercase text-sm mt-5 flex items-center justify-center w-full"
+              onClick={() => { handleOpenProofOfPayment(order._id, order.total, order.total_payments); } }
             >
               <VerticalAlignCenterIcon
-                className="color-[#fff] text-[20px]  mr-[10px]"
-              />
+                className="color-[#fff] text-[20px]  mr-[10px]" />
               <span>Comprobante de pago</span>
             </button>
+            { order.total_payments === 0 &&  <button className="bg-[#218DFF] text-white font-Poppins  py-[10px] px-[15px] uppercase text-sm mt-5 flex items-center justify-center w-full"
+              onClick={() => { handleClickchangePaymentMethod(); } }
+            >
+                <CreditCardIcon
+                  className="color-[#fff] text-[20px]  mr-[10px]" />
+                <span>Pagar con tarjeta</span>
+              </button>}
+           </>
           }
 
           {
@@ -388,6 +402,16 @@ export const PendingPaymentOrderIndex = ({ order, handleOpenProofOfPayment, stat
             <span className="text-[#888] capitalize">{order?.shippment_direction?.references}</span>
           </div>
         </div>
+      </Modal>
+      <Modal
+        title="Pagar con tarjeta"
+        open={openChangeMethod}
+        handleOpenCheckout={handleClickchangePaymentMethod}
+        actions={false}
+        fullWidth={true}
+        maxWidth={'sm'}
+      >
+       <CheckoutChangeMethod changemethod={changemethod } />
       </Modal>
       <Modal
         title="Detalles del pedido"

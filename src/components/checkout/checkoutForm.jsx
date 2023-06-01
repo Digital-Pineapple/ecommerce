@@ -62,7 +62,6 @@ export const CheckoutForm = ({ setLoadingForm, cart }) => {
     const { error } = await stripe.confirmPayment({
       elements,
       tagManager: {
-      return : ga.onCheckoutFinalize(cart, 'stripe')
       },
       confirmParams: {
         // Make sure to change this to your payment completion page

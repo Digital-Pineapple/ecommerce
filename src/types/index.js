@@ -148,6 +148,7 @@ export const types = {
     load_product_detail: '[ORDERS] load product detail',
     get_order_id: '[ORDERS] get order id',
     finish_order_canvas: '[ORDERS] finish order canvas',
+    changed_payment_method: '[ORDERS] chenge payment method',
     start_send_images_to_canvas: '[ORDERS] start send images to canvas',
 
 

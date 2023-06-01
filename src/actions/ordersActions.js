@@ -350,9 +350,35 @@ export const startFinishOrderCanvas = (formData, order_id) => {
     }
   }
 }
-
 const finishOrderCanvas = (order) => ({
   type: types.finish_order_canvas,
+  payload: order
+})
+export const getChangePaymenMethod = ( order_id) => {
+  return async (dispatch) => {
+    try {
+      const token = Cookies.get("token");
+      let url = `/orders/change/method/${order_id}`;
+      const { data } = await client.get(url, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      dispatch(changedPaymentMethod(data));
+      return true;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        errorNotify(error.response.data.message);
+        return false;
+      }
+      errorNotify("Parece que hubo un error - Intenta más tarde")
+      return false;
+    }
+  }
+}
+
+const changedPaymentMethod = (order) => ({
+  type: types.changed_payment_method,
   payload: order
 })
 
