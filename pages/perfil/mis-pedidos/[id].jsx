@@ -96,7 +96,7 @@ console.log(shippingDetail);
                 {
                     shippingDetail && (
                         shippingDetail.map((shipping) => (
-                            <div>
+                            <div key={shipping._id}>
                             <div className="text-sm md:text-base mb-10 mt-3 flex items-center">
                                 <div className="w-6/12">
                                     <p className="font-semibold">Paquetería:</p>

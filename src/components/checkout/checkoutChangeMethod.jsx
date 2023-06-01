@@ -66,7 +66,7 @@ export const CheckoutChangeMethod = ({ changemethod }) => {
                 <p className="font-Poppins font-medium capitalize text-[#333] leading-6">Folio</p>
                 <p className="font-Poppins font-medium capitalize text-[#333] leading-6">Total de venta</p>
             </div>
-            {orders.map(order => <div className="flex justify-between mb-2 ">
+            {orders.map(order => <div key={order._id} className="flex justify-between mb-2 ">
                 <span className="text-[#888] capitalize">{order.folio} </span>
                 <span className="text-[#888] capitalize"> $ {order.total} {currency} </span>
             </div>)}
