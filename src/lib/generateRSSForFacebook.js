@@ -34,7 +34,7 @@ export default async function getRSSForFacebook() {
         { 'condition': 'used' },
         { 'price': `${product.price} MXN` },
         { 'link': `${siteURL}/productos/${product?.url}` },
-        { 'image_link': product?.multimedia[0]?.path, },
+        { 'image_link':`${product?.multimedia[0].path}/original.webp`, },
         { 'brand': product?.brand?.name },
         { 'google_product_category': 2975}
       ]

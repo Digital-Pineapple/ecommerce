@@ -35,7 +35,7 @@ export default async function getRSS() {
           { 'condition': 'used' },
           { 'price': `${product.price}` },
           { 'link': `${siteURL}/productos/${product?.url}` },
-          { 'image_link': product?.multimedia[0]?.path },
+          { 'image_link':`${product?.multimedia[0].path}/original.webp`, },
           { 'brand': name },
           { 'google_product_category': 2975}
         ]
