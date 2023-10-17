@@ -191,6 +191,7 @@ export const startVerifyToken = (accessToken) => {
             const { user, token } = res.data;
             dispatch(verifyToken(user, token));
             Cookies.set('token', token)
+            console.log(token);
         } catch (error) {
             Cookies.remove('token');
         }
