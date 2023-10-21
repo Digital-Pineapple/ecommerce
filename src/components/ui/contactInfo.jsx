@@ -1,4 +1,4 @@
-export const ContactInfo = ({ icon, title, text, phonetwo }) => {
+export const ContactInfo = ({ icon, title, text, phonetwo, phone }) => {
   return (
     <div className="w-full flex flex-wrap pb-[42px] items-center">
       <span className="w-[60px] text-[#222] text-center text-lg">
@@ -17,7 +17,7 @@ export const ContactInfo = ({ icon, title, text, phonetwo }) => {
           {phonetwo}
         </p>
         <p className="max-w-[245px] font-Poppins text-[15px] leading-[1.666] text-[#888]">
-          {phonethree}
+          {phone}
         </p>
       </div>
     </div>

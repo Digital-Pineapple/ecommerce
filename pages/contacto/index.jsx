@@ -178,7 +178,7 @@ const ContactUs = () => {
                   title="Hablemos"
                   text="+52 (722 781 5291)"
                   phonetwo="+52 (729 143 9285)"
-                  phonethree="+52 (729 322 2418)"
+                  phone="+52 (729 322 2418)"
                 />
 
                 <ContactInfo
