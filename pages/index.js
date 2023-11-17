@@ -5,33 +5,38 @@ import Layout from "../src/components/Layouts";
 /**Actions */
 import { startLoadCategoriesHome } from "../src/actions/categoryActions";
 import { startLoadAdministrableLogo } from "../src/actions/administrableActions";
-
+import { startLoadAdministrableSlider } from "../src/actions/administrableActions";
 /**Actions */
 import { startLoadReviews } from "../src/actions/reviewsActions";
 import { startLoadCurrencies } from "../src/actions/countryAcctions";
 import { startFilterProducts } from "../src/actions/productsAction";
 
-const endpoint = '/brands/with/categories';
-
+const endpoint = "/brands/with/categories";
 
 /***************************************Components*************************************** */
 
+import loadable from "@loadable/component";
 
-import loadable from '@loadable/component';
+import ProductsAreaComponent from "../src/components/home/ProductsArea";
+import { Slider } from "../src/components/home";
 
-import ProductsAreaComponent from '../src/components/home/ProductsArea';
-
-const ProductsOfferAreaComponent = loadable(() => import('../src/components/home/ProductsOfferArea'));
-const PartnerAreaComponent = loadable(() => import('../src/components/home/PartnerArea'));
-const NewsletterComponent = loadable(() => import('../src/components/home/Newsletter'));
-const TestimonialAreaComponenet = loadable(() => import('../src/components/home/testimonialArea'));
-
+const ProductsOfferAreaComponent = loadable(() =>
+  import("../src/components/home/ProductsOfferArea")
+);
+const PartnerAreaComponent = loadable(() =>
+  import("../src/components/home/PartnerArea")
+);
+const NewsletterComponent = loadable(() =>
+  import("../src/components/home/Newsletter")
+);
+const TestimonialAreaComponenet = loadable(() =>
+  import("../src/components/home/testimonialArea")
+);
 
 export default function HomePage() {
-
   const { logo } = useSelector((state) => state.administrable);
-  const { products } = useSelector(state => state.products);
-
+  const { products } = useSelector((state) => state.products);
+  const { sliders } = useSelector((state) => state.administrable);
   const origin = typeof window === "undefined" ? "" : window.location.origin;
 
   return (
@@ -46,7 +51,7 @@ export default function HomePage() {
       robots="index, follow"
       canonical={origin}
     >
-
+      {sliders.length > 0 && <Slider sliders={sliders} />}
       <ProductsAreaComponent products={products} />
       <ProductsOfferAreaComponent />
       <PartnerAreaComponent />
@@ -56,10 +61,19 @@ export default function HomePage() {
   );
 }
 
-export const getServerSideProps = wrapper.getServerSideProps((store) => async (ctx) => {
-  await store.dispatch(startLoadCurrencies());
-  await store.dispatch(startLoadAdministrableLogo());
-  await store.dispatch(startLoadCategoriesHome());
-  await store.dispatch(startLoadReviews());
-  await store.dispatch(startFilterProducts(endpoint, undefined, ctx.req?.cookies?.Currency || 'MXN'));
-});
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (ctx) => {
+    await store.dispatch(startLoadCurrencies());
+    await store.dispatch(startLoadAdministrableLogo());
+    await store.dispatch(startLoadCategoriesHome());
+    await store.dispatch(startLoadReviews());
+    await store.dispatch(startLoadAdministrableSlider());
+    await store.dispatch(
+      startFilterProducts(
+        endpoint,
+        undefined,
+        ctx.req?.cookies?.Currency || "MXN"
+      )
+    );
+  }
+);
