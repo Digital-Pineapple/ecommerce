@@ -15,8 +15,8 @@ export const Slider = ({ sliders }) => {
       {" "}
       {sliders && (
         <Slide {...properties}>
-          {sliders.map((slideImage, index) => (
-            <div className={styles["each-slide"]} key={index}>
+          {sliders.map((slideImage) => (
+            <div className={styles["each-slide"]} key={slideImage._id}>
               <div
                 style={{
                   backgroundImage: `url(${slideImage.imageWeb})`,
