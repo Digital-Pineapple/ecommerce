@@ -242,7 +242,7 @@ console.log(shippingDetail);
                                                 <Zoom zoomMargin={45}>
                                                     <picture>
                                                         <source media="(max-width: 10px)" srcSet={payment.image} />
-                                                        <img
+                                                        <Image
                                                             src={payment.image}
                                                             alt={payment?.image}
                                                             className="min-w-[6rem] min-h-[6rem] h-[6rem] w-[6rem]"

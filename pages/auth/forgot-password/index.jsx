@@ -16,7 +16,7 @@ import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 
 import ErrorIcon from '@mui/icons-material/Error';
 import { startLoadCurrencies } from "../../../src/actions/countryAcctions";
-
+import Image from "next/image";
 const ForgotPassword = () => {
 
   const { logo } = useSelector((state) => state.administrable);
@@ -65,7 +65,7 @@ const ForgotPassword = () => {
             <form onSubmit={formik.handleSubmit}>
               <div className="mb-10">
                 <div className="flex justify-center">
-                  <img
+                  <Image
                     src={logo}
                     alt="Wapizima"
                     width={150}

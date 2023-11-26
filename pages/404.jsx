@@ -1,14 +1,14 @@
 import Link from 'next/link';
-
+import Image from "next/image"
 const NotFoundPage = () => {
   return (
     <section className="container mx-auto text-center flex items-center flex-col justify-center min-h-screen font-Poppins">
       <div className="w-full grid-cols-1 md:grid grid-cols-2 flex items-center justify-center">
         <div className="w-full hidden md:block">
-          <img
+          <Image
             src="/assets/icons/404.svg"
-            width="600"
-            height="600"
+            width={600}
+            height={600}
           />
         </div>
         <div>

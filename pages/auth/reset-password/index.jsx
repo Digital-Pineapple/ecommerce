@@ -15,7 +15,7 @@ import { resetPassword } from "../../../src/actions/authActions";
 
 import PasswordIcon from '@mui/icons-material/Password';
 import { startLoadCurrencies } from "../../../src/actions/countryAcctions";
-
+import Image from "next/image";
 const ResetPassword = () => {
 
   
@@ -67,7 +67,7 @@ const ResetPassword = () => {
           <div className="w-full md:w-8/12 lg:w-7/12 lg:p-20 border-2 border-gray-200 bg-white p-10">
             <form onSubmit={formik.handleSubmit}>
               <div className="flex justify-center">  
-              <img
+              <Image
                   src={logo}
                   width={150}
                   height={100}

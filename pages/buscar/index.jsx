@@ -14,7 +14,6 @@ import Layout from '../../src/components/Layouts';
 import { ProductCard } from '../../src/components/ui';
 
 import LoadingScreen from '../../src/components/LoadingScreen';
-
 const Search = () => {
 
   const currency = Cookies.get('Currency') || 'MXN';
