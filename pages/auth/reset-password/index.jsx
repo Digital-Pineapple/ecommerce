@@ -71,6 +71,7 @@ const ResetPassword = () => {
                   src={logo}
                   width={150}
                   height={100}
+                  alt="reset_password"
                 />
               </div>
               <h1 className="text-4xl font-bold mb-5 text-center uppercase">Restablecer la contraseña</h1>

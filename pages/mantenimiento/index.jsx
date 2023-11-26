@@ -11,6 +11,7 @@ const Maintainment = () => {
                         layout="intrinsic"
                         width={300}
                         height={300}
+                        alt="manteinament"
                     />
                     <h1 className="text-6xl pb-5">Vuelve pronto</h1>
                     <h2 className="text-4xl pb-2">¡El sitio web esta en matenimiento!</h2>

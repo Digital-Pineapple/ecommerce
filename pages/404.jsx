@@ -9,6 +9,7 @@ const NotFoundPage = () => {
             src="/assets/icons/404.svg"
             width={600}
             height={600}
+            alt="not_found"
           />
         </div>
         <div>
