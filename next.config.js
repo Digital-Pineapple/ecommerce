@@ -20,5 +20,6 @@ module.exports = {
   },
   experimental: {
     // outputStandalone: true
+    outputStandalone: true,
   },
 };
