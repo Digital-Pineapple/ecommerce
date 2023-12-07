@@ -6,7 +6,7 @@ const OfferComponent = ({ sliders }) => {
       <div className="w-full mx-auto">
         <h1>Nuestras ofertas</h1>
         {sliders.map((sl) => (
-          <image src={sl.imageWeb} />
+          <image src={sl.imageWeb} key={sl.id} />
         ))}
       </div>
     </section>

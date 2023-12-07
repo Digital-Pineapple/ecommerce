@@ -11,7 +11,7 @@ export const startLoadAdministrableLogo = () => {
     try {
       let url = "administrable/logo";
       const { data } = await client.get(url);
-      console.log(data, "la data");
+      // console.log(data, "la data");
       dispatch(loadAdministrableLogo(data.logo));
     } catch (error) {
       console.log(error);
