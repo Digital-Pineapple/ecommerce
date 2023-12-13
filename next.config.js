@@ -19,7 +19,7 @@ module.exports = {
     minimumCacheTTL: 31536000,
   },
   experimental: {
-    // outputStandalone: true
-    outputStandalone: true,
+    //Este se tiene que descomentar para cuando se saca a produccion
+    // outputStandalone: false,
   },
 };

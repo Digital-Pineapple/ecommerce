@@ -7,7 +7,7 @@ import { startLoadCategoriesHome } from "../src/actions/categoryActions";
 import { startLoadAdministrableLogo } from "../src/actions/administrableActions";
 import { startLoadAdministrableSlider } from "../src/actions/administrableActions";
 /**Actions */
-import { startLoadReviews } from "../src/actions/reviewsActions";
+// import { startLoadReviews } from "../src/actions/reviewsActions";
 import { startLoadCurrencies } from "../src/actions/countryAcctions";
 import { startFilterProducts } from "../src/actions/productsAction";
 
@@ -56,7 +56,7 @@ export default function HomePage() {
       <ProductsOfferAreaComponent />
       <PartnerAreaComponent />
       <NewsletterComponent />
-      <TestimonialAreaComponenet />
+      {/**<TestimonialAreaComponenet />**/}
     </Layout>
   );
 }
@@ -66,7 +66,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
     await store.dispatch(startLoadCurrencies());
     await store.dispatch(startLoadAdministrableLogo());
     await store.dispatch(startLoadCategoriesHome());
-    await store.dispatch(startLoadReviews());
+    // await store.dispatch(startLoadReviews());
     await store.dispatch(startLoadAdministrableSlider());
     await store.dispatch(
       startFilterProducts(
