@@ -68,7 +68,7 @@ const CardProduct = ({
           </div>
         </div>
       </div>
-      <style jsx>
+      <style>
         {`
           .block-pick:hover .block-btn {
             bottom: 100px;
