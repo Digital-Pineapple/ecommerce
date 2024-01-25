@@ -1,21 +1,24 @@
 import { CircularProgress } from "@mui/material";
-import { PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import {
+  PaymentElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import * as ga from '../../libs/ga/index';
-
+import * as ga from "../../libs/ga/index";
+import useEscapeKey from "../../helpers/useEscapeKey";
 export const CheckoutForm = ({ setLoadingForm, cart }) => {
-
   const stripe = useStripe();
   const elements = useElements();
-
+  const { isEscapeKeyPressed } = useEscapeKey();
   const router = useRouter();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!stripe) {
+    if (!stripe || !isEscapeKeyPressed) {
       return;
     }
 
@@ -47,10 +50,8 @@ export const CheckoutForm = ({ setLoadingForm, cart }) => {
     });
   }, [stripe]);
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -61,11 +62,10 @@ export const CheckoutForm = ({ setLoadingForm, cart }) => {
     setIsLoading(true);
     const { error } = await stripe.confirmPayment({
       elements,
-      tagManager: {
-      },
+      tagManager: {},
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: origin + '/perfil/mis-pedidos'
+        return_url: origin + "/perfil/mis-pedidos",
       },
     });
 
@@ -86,29 +86,29 @@ export const CheckoutForm = ({ setLoadingForm, cart }) => {
   return (
     <div className="mt-10">
       <form id="payment-form" onSubmit={handleSubmit}>
-        <PaymentElement id="payment-element" onReady={() => setLoadingForm(false)} />
+        <PaymentElement
+          id="payment-element"
+          onReady={() => setLoadingForm(false)}
+        />
         {message && <div id="payment-message">{message}</div>}
         <button
           type="submit"
           className="bg-[#333] text-luz py-[23px] px-[0px] w-full uppercase text-[15px] hover:bg-[#000] mt-5"
-          disabled={isLoading || !stripe && !elements}
+          disabled={isLoading || (!stripe && !elements)}
           id="submit"
         >
           <span id="button-text">
-            {
-              isLoading ?
-                <div className="flex justify-center items-center">
-                  <CircularProgress className="mr-5" />
-                  <span> Espere un momento</span>
-
-                </div>
-                :
-                'Pagar Ahora'
-            }
-
+            {isLoading ? (
+              <div className="flex justify-center items-center">
+                <CircularProgress className="mr-5" />
+                <span> Espere un momento</span>
+              </div>
+            ) : (
+              "Pagar Ahora"
+            )}
           </span>
         </button>
       </form>
     </div>
-  )
-}
+  );
+};
