@@ -71,10 +71,12 @@ export const startfinaliceTransferCheckout = (
   return async (dispatch, getState) => {
     const { order_id } = getState().cart;
     const typeOrder = Cookies.get("typeOrder");
+    let origin = "web";
     const data = {
       bank_account_id,
       typeOrder,
       successTransfer,
+      origin,
     };
     try {
       let url = `/orders/finalize/sale/${order_id}`;
