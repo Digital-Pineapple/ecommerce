@@ -14,8 +14,8 @@ import { ProductCard } from "../../src/components/ui";
 import ButtonGroup from "../../src/components/ui/buttonGroup";
 import Image from "next/image";
 import { Breadcrumbs, Container, Typography } from "@mui/material";
-import HomeIcon from '@mui/icons-material/Home';
-import { CircularProgress } from '@mui/material';
+import HomeIcon from "@mui/icons-material/Home";
+import { CircularProgress } from "@mui/material";
 
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Link from "next/link";
@@ -24,16 +24,19 @@ import { startLoadCurrencies } from "../../src/actions/countryAcctions";
 import { useCart } from "../../src/hooks/useCart";
 
 const Show = () => {
-
   const router = useRouter();
   const { product, relatedProducts } = useSelector((state) => state.products);
-
-  console.log(product)
 
   const { cart } = useSelector((state) => state.cart);
   const { logged } = useSelector((state) => state.auth);
 
-  const { addProduct, updateProductQuantity, handleChangeProductQuantity, quantity: inputQuantity, loading } = useCart(logged, "", product, cart, 2, false);
+  const {
+    addProduct,
+    updateProductQuantity,
+    handleChangeProductQuantity,
+    quantity: inputQuantity,
+    loading,
+  } = useCart(logged, "", product, cart, 2, false);
 
   const { totalWithDiscountApply } = helpers.calculatNewTotalToPay(
     product?.discount,
@@ -55,30 +58,33 @@ const Show = () => {
   const structuredData = {
     "@context": "https://www.schema.org",
     "@type": "Product",
-    "description": product?.description,
-    "name": product?.name,
-    "image": product?.multimedia[0]?.path,
-    "sku": product?.sku,
-    "brand": {
+    description: product?.description,
+    name: product?.name,
+    image: product?.multimedia[0]?.path,
+    sku: product?.sku,
+    brand: {
       "@type": "Brand",
-      "name": product?.brand?.name,
+      name: product?.brand?.name,
     },
-    "offers": {
+    offers: {
       "@type": "Offer",
-      "url": url,
-      "price": product?.price,
-      "priceCurrency": "MXN",
-    }
+      url: url,
+      price: product?.price,
+      priceCurrency: "MXN",
+    },
   };
 
   return (
     <Layout
       title={`Wapizima - ${product?.name}`}
-      keywords={`Wapizima, ${product?.category?.name}, ${product?.brand?.name
-        }. ${product?.subcategory?.name
-        }, ${product?.name.toLowerCase()}, ${product?.description?.toLowerCase()},${product?.tags.length > 0 &&
+      keywords={`Wapizima, ${product?.category?.name}, ${
+        product?.brand?.name
+      }. ${
+        product?.subcategory?.name
+      }, ${product?.name.toLowerCase()}, ${product?.description?.toLowerCase()},${
+        product?.tags.length > 0 &&
         product?.tags.map((tags) => ` ${tags?.tag_id?.name}`)
-        }`}
+      }`}
       description={product?.description}
       ogTitle={`Wapizima - ${product?.name}`}
       ogType="Product"
@@ -145,10 +151,11 @@ const Show = () => {
                     </p>
                   )}
                   <p
-                    className={`mr-12 ${product?.discount > 0
-                      ? "line-through text-[#333] text-[18px] font-thin"
-                      : "text-[18px] text-[#333]"
-                      }`}
+                    className={`mr-12 ${
+                      product?.discount > 0
+                        ? "line-through text-[#333] text-[18px] font-thin"
+                        : "text-[18px] text-[#333]"
+                    }`}
                   >
                     {price}
                   </p>
@@ -160,25 +167,19 @@ const Show = () => {
               <div className="mt-5">
                 <div className="flex items-center">
                   <h3 className="text-[#666] text-[16px]">Marca:</h3>
-                  <p
-                    className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500"
-                  >
+                  <p className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500">
                     {product?.brand?.name}
                   </p>
                 </div>
                 <div className="flex items-center">
                   <h3 className="text-[#666] text-[16px]">Categoría:</h3>
-                  <p
-                    className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500"
-                  >
+                  <p className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500">
                     {product?.category?.name}
                   </p>
                 </div>
                 <div className="flex items-center">
                   <h3 className="text-[#666] text-[16px]">Subcategoría:</h3>
-                  <p
-                    className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500"
-                  >
+                  <p className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500">
                     {product?.subcategory?.name}
                   </p>
                 </div>
@@ -191,9 +192,7 @@ const Show = () => {
                           key={tag?.tag_id?._id}
                           className="bg-[#333] rounded-3xl px-4 py-1 mr-2 cursor-pointer "
                         >
-                          <span
-                            className="text-secondary font-medium text-xs duration-500 flex items-center justify-center text-center"
-                          >
+                          <span className="text-secondary font-medium text-xs duration-500 flex items-center justify-center text-center">
                             {tag?.tag_id?.name}
                           </span>
                         </div>
@@ -201,65 +200,65 @@ const Show = () => {
                     </div>
                   </div>
                 )}
-                {
-                  product?.product_type === '2' && (
-                    <>
-                      <div className="flex items-center mt-4">
-                        <h3 className="text-[#666] text-[16px]">Tipo de producto:</h3>
-                        <p
-                          className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500"
-                        >
-                          {product?.variation?.name}
-                        </p>
-                      </div>
-                      <div className="flex items-center">
-                        <h3 className="text-[#666] text-[16px]">Imágenes:</h3>
-                        <p
-                          className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500"
-                        >
-                          {product?.variation?.number_images === '1' ? `${product?.variation?.number_images} imágenen requerida` : `${product?.variation?.number_images} imágenes requeridas`}
-                        </p>
-                      </div>
-                    </>
-                  )
-                }
+                {product?.product_type === "2" && (
+                  <>
+                    <div className="flex items-center mt-4">
+                      <h3 className="text-[#666] text-[16px]">
+                        Tipo de producto:
+                      </h3>
+                      <p className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500">
+                        {product?.variation?.name}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <h3 className="text-[#666] text-[16px]">Imágenes:</h3>
+                      <p className="text-[#333] font-medium ml-2 cursor-pointer hover:text-gray-700 duration-500">
+                        {product?.variation?.number_images === "1"
+                          ? `${product?.variation?.number_images} imágenen requerida`
+                          : `${product?.variation?.number_images} imágenes requeridas`}
+                      </p>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="mt-12 lg:mt-10">
-                {
-                  product?.product_type === '1' && product.quantity > 0 && (
-                    <div className="flex items-center mb-10">
-                      <ButtonGroup
-                        quantity={inputQuantity}
-                        increaseDecreaseQuantityProduct={updateProductQuantity}
-                        handleChangeQuantity={handleChangeProductQuantity}
-                        product={product}
-                      />
+                {product?.product_type === "1" && product.quantity > 0 && (
+                  <div className="flex items-center mb-10">
+                    <ButtonGroup
+                      quantity={inputQuantity}
+                      increaseDecreaseQuantityProduct={updateProductQuantity}
+                      handleChangeQuantity={handleChangeProductQuantity}
+                      product={product}
+                    />
 
-                      <button
-                        className="h-[45px] top-[-2px] relative cursor-pointer border-[1px] border-solid border-[#333] flex items-center px-[25px] rounded-none uppercase hover:bg-[#333] hover:text-secondary transition-all duration-700 ease-in-out text-xs ml-2 md:ml-5 md:text-[14px] md:text-xs"
-                        onClick={addProduct}
-                      >
-                        {                          
-                          loading ? (<><CircularProgress size={25} /> <p className="ml-5">Agregando...</p></>)
-                            : (<><ShoppingCartIcon /> Añadir a carrito</>)
-                      }
-                      </button>
-                    </div>
-                  )
-                }
-                {
-                  product?.quantity > 0 && (
                     <button
-                      className="bg-[#333] border-2 text-white py-4 w-full font-bold
+                      className="h-[45px] top-[-2px] relative cursor-pointer border-[1px] border-solid border-[#333] flex items-center px-[25px] rounded-none uppercase hover:bg-[#333] hover:text-secondary transition-all duration-700 ease-in-out text-xs ml-2 md:ml-5 md:text-[14px] md:text-xs"
+                      onClick={addProduct}
+                    >
+                      {loading ? (
+                        <>
+                          <CircularProgress size={25} />{" "}
+                          <p className="ml-5">Agregando...</p>
+                        </>
+                      ) : (
+                        <>
+                          <ShoppingCartIcon /> Añadir a carrito
+                        </>
+                      )}
+                    </button>
+                  </div>
+                )}
+                {product?.quantity > 0 && (
+                  <button
+                    className="bg-[#333] border-2 text-white py-4 w-full font-bold
                             transition-all duration-700 ease-in-out
                             hover:bg-[#000]
                             "
-                      onClick={() => handleClickRedirectCart()}
-                    >
-                      COMPRAR AHORA!
-                    </button>
-                  )
-                }
+                    onClick={() => handleClickRedirectCart()}
+                  >
+                    COMPRAR AHORA!
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -277,12 +276,12 @@ const Show = () => {
               Productos Relacionados
             </h3>
           </div>
-          <div className={`grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-24`}>
-            {
-              relatedProducts.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))
-            }
+          <div
+            className={`grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-24`}
+          >
+            {relatedProducts.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
 
             {/* {relatedProducts.map((product) => (
               (dimensions === 'sm') ? (
@@ -302,14 +301,14 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async (ctx) => {
     await store.dispatch(startLoadCurrencies());
     const url = ctx.query.url;
-    const currency = ctx.req.cookies.Currency || 'MXN';
+    const currency = ctx.req.cookies.Currency || "MXN";
     const isValid = await store.dispatch(startLoadProduct(url, currency));
     await store.dispatch(startLoadAdministrableLogo());
     await store.dispatch(startLoadCurrencies());
     if (!isValid) {
       return {
-        notFound: true
-      }
+        notFound: true,
+      };
     }
   }
 );

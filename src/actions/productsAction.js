@@ -1,8 +1,8 @@
-import axios from 'axios';
-import client from '../config/axiosConfig';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import client from "../config/axiosConfig";
+import Cookies from "js-cookie";
 
-import { types } from '../types';
+import { types } from "../types";
 
 export const startLoadProducts = () => {
   return async (dispatch) => {
@@ -11,7 +11,7 @@ export const startLoadProducts = () => {
       const res = await client.get(url);
       dispatch(loadProducts(res.data.products));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 1 products");
     }
   };
 };
@@ -27,8 +27,8 @@ export const startLoadProduct = (slug, currency) => {
     try {
       const res = await client.get(url, {
         headers: {
-          'Currency': currency
-        }
+          Currency: currency,
+        },
       });
       const { product, relatedProducts } = res.data;
       dispatch(loadProduct(product, relatedProducts));
@@ -72,7 +72,7 @@ export const startLoadProductsPerCategory = (category) => {
       const res = await client.get(url);
       dispatch(loadProductsPerCategory(category, res.data.products));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 2 products");
     }
   };
 };
@@ -92,7 +92,7 @@ export const startloadProductsPerTags = (tag) => {
       const res = await client.get(url);
       dispatch(loadProductsPerTags(tag, res.data.products));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 3 products");
     }
   };
 };
@@ -119,7 +119,7 @@ export const startLoadProductPerPagination = (page) => {
       const res = await client.get(url);
       dispatch(loadProducts(res.data));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 4 products");
     }
   };
 };
@@ -131,13 +131,17 @@ export const loadProductPerPagination = (products) => ({
 
 /********************+filtro de productos *******************************/
 
-export const startFilterProducts = (endpoint, params = '', currency = Cookies.get('Currency') || 'MXN') => {
+export const startFilterProducts = (
+  endpoint,
+  params = "",
+  currency = Cookies.get("Currency") || "MXN"
+) => {
   return async (dispatch) => {
     try {
       const { data } = await client.get(`${endpoint}${params}`, {
         headers: {
-          'Currency': currency
-        }
+          Currency: currency,
+        },
       });
       dispatch(filterProducts(data, params));
       return true;
@@ -151,23 +155,26 @@ export const startFilterProducts = (endpoint, params = '', currency = Cookies.ge
 
 export const filterProducts = (products, params) => ({
   type: types.filter_products,
-  payload: products
+  payload: products,
 });
 
 /**************************buscar producto*********************************/
 
-export const startSearchProduct = (query, currency = Cookies.get('Currency') || 'MXN') => {
+export const startSearchProduct = (
+  query,
+  currency = Cookies.get("Currency") || "MXN"
+) => {
   return async (dispatch) => {
     const url = `/search/products?search=${query}`;
     try {
       const res = await client.get(url, {
         headers: {
-          'Currency': currency
-        }
+          Currency: currency,
+        },
       });
       dispatch(searchProduct(res.data.results));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 5 products");
     }
   };
 };
@@ -177,17 +184,15 @@ export const searchProduct = (products) => ({
   payload: products,
 });
 
-
 export const startLoadProductsRSS = async () => {
   let url = "/products/without/pagination";
   try {
     const res = await client.get(url);
     return res.data.products;
   } catch (error) {
-    console.log(error);
+    console.log(error, "error 6 products");
   }
 };
-
 
 export const loadBrands = async () => {
   let url = "/brands";
@@ -195,9 +200,9 @@ export const loadBrands = async () => {
     const res = await client.get(url);
     return res.data.brands;
   } catch (error) {
-    console.log(error);
+    console.log(error, "error 7 products");
   }
-}
+};
 
 export const startLoadProductsPerBrand = async (brand_id) => {
   let url = `/products/brand/${brand_id}`;
@@ -205,25 +210,25 @@ export const startLoadProductsPerBrand = async (brand_id) => {
     const res = await client.get(url);
     return res.data.products;
   } catch (error) {
-    console.log(error);
+    console.log(error, "error 8 products");
   }
-}
+};
 
-export const startLoadProductsMostSold = (currency = 'MXN') => {
+export const startLoadProductsMostSold = (currency = "MXN") => {
   return async (dispatch) => {
-    const url = '/products/most/sold-products';
+    const url = "/products/most/sold-products";
     try {
       const res = await client.get(url, {
         headers: {
-          'Currency': currency
-        }
+          Currency: currency,
+        },
       });
       dispatch(loadProductsMostSold(res.data.products));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 9 products");
     }
-  }
-}
+  };
+};
 
 const loadProductsMostSold = (products) => ({
   type: types.load_products_most_sold,
@@ -232,5 +237,5 @@ const loadProductsMostSold = (products) => ({
 
 export const clearSubcategory = (typeToFilter) => ({
   type: types.clear_subcategory,
-  payload: typeToFilter
-})
+  payload: typeToFilter,
+});

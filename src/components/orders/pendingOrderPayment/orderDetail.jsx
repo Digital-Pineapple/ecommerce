@@ -1,40 +1,40 @@
-import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
-import { useSelector } from "react-redux"
+import {
+  Grid,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
+import { useSelector } from "react-redux";
 import { helpers } from "../../../helpers";
 import OrderCancelStatus from "../OrderCancelStatus";
 import OrderStatus from "../OrderStatus";
 
 export const OrderDetails = ({ status, shippings }) => {
-  
-  console.log(shippings)
-
   return (
     <Grid container spacing={3} className="font-Poppins">
-      {
-        status === 3 && (
-          shippings.map((shipping) => (
-            <>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <div className="flex justify-between items-center">
-              <p>Paquetería:</p>
-              <p className="max-w-[300px] text-[#888] text-sm font-light">
-                {shipping?.shipment_id?.name}
-              </p>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-            <div className="flex justify-between items-center">
-              <p>Número de guía:</p>
-              <p className="max-w-[300px] text-[#888] text-sm font-light">
-                {shipping?.no_guide}
-              </p>
-            </div>
-          </Grid>
+      {status === 3 &&
+        shippings.map((shipping) => (
+          <>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <div className="flex justify-between items-center">
+                <p>Paquetería:</p>
+                <p className="max-w-[300px] text-[#888] text-sm font-light">
+                  {shipping?.shipment_id?.name}
+                </p>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+              <div className="flex justify-between items-center">
+                <p>Número de guía:</p>
+                <p className="max-w-[300px] text-[#888] text-sm font-light">
+                  {shipping?.no_guide}
+                </p>
+              </div>
+            </Grid>
           </>
-          ))
-          
-        )
-      }
+        ))}
       {/* <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         <div className="flex justify-between items-center">
           <p>Dirección de envÍo:</p>
@@ -80,5 +80,5 @@ export const OrderDetails = ({ status, shippings }) => {
         </div>
       </Grid> */}
     </Grid>
-  )
-}
+  );
+};

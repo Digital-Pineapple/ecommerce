@@ -53,12 +53,10 @@ export const CheckoutTransfer = ({
           cart
         )
       );
-    // console.log(bankAccountSelected._id)
     else if (!isEscapeKeyPressed) {
       await dispatch(
         startfinaliceTransferCheckout(banksAccounts[0]?._id, token, currency)
       );
-      // console.log(banksAccounts[0]._id);
       dispatch(clearCart());
     }
     setLoadingForm(false);

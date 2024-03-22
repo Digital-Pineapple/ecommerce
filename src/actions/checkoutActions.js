@@ -51,7 +51,7 @@ export const startLoadBanksAccounts = () => {
       const { data } = await client.get(url);
       dispatch(loadBanksAccounts(data.bankAccounts));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 1 checkou");
     }
   };
 };

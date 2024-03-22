@@ -11,17 +11,12 @@ import useEscapeKey from "../../helpers/useEscapeKey";
 export const CheckoutForm = ({ setLoadingForm, cart }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const { isEscapeKeyPressed } = useEscapeKey();
   const router = useRouter();
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!stripe || !isEscapeKeyPressed) {
-      return;
-    }
-
     const origin = typeof window === "undefined" ? "" : window.location.origin;
 
     const clientSecret = new URLSearchParams(window.location.search).get(

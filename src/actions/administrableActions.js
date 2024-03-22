@@ -13,7 +13,7 @@ export const startLoadAdministrableLogo = () => {
       const { data } = await client.get(url);
       dispatch(loadAdministrableLogo(data.logo));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 1 administrable actions");
     }
   };
 };
@@ -35,7 +35,7 @@ export const startLoadAdministrableSlider = () => {
       const { data } = await client.get(url);
       dispatch(loadAdministrableSlider(data.sliders.slider));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 2 administrable actions");
     }
   };
 };
@@ -56,7 +56,7 @@ export const startLoadAdministrableAbout = () => {
       const { data } = await client.get(url);
       dispatch(loadAdministrableAbout(data.about));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 3 administrable actions");
     }
   };
 };
@@ -81,7 +81,7 @@ export const startLoadCountryPermissions = () => {
       const { data } = await client.get(url);
       dispatch(loadCountryPermissions(data.countries));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 4 administrable actions");
     }
   };
 };
@@ -105,7 +105,7 @@ export const startLoadMaintainment = async () => {
     const data = await response.json();
     return data.maintainment;
   } catch (error) {
-    console.log(error);
+    console.log(error, "error 5 administrable actions");
   }
 };
 
@@ -116,7 +116,7 @@ export const startLoadPolicies = (type) => {
       const { data } = await client.get(url);
       dispatch(loadPolicies(data.policie));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 6 administrable actions");
     }
   };
 };

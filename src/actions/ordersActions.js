@@ -16,7 +16,7 @@ export const startLoadPendingOrders = (token) => {
       });
       dispatch(loadPendingOrders(data.orders));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 1 orders actions");
     }
   };
 };
@@ -46,7 +46,7 @@ export const startLoadOrdersCanceled = (token) => {
       });
       dispatch(loadOrdersCanceled(data.orders));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 2 order actions");
     }
   };
 };
@@ -67,7 +67,7 @@ export const startLoadOrdersApproved = (token) => {
       });
       dispatch(loadOrdersApproved(data.orders));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 3 orders actions");
     }
   };
 };
@@ -88,7 +88,7 @@ export const startLoadOrdersShipped = (token) => {
       });
       dispatch(loadOrdersShipped(data.orders));
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 4 order actions");
     }
   };
 };
@@ -101,7 +101,7 @@ export const loadOrdersShipped = (ordersShipped) => ({
 export const startUploadProofOfPayment = (data) => {
   return async (dispatch, getState) => {
     const { order_id } = getState().orders;
-    const amount = data.get('amount');
+    const amount = data.get("amount");
     try {
       const token = Cookies.get("token");
       let url = `payments/${order_id}`;
@@ -111,7 +111,8 @@ export const startUploadProofOfPayment = (data) => {
         },
       });
       successNotify("Comprobante de pago se ha subido correctamente");
-      if (res.data?.due > 0) successNotify(`El monto por pagar es: $${res.data.due}`);
+      if (res.data?.due > 0)
+        successNotify(`El monto por pagar es: $${res.data.due}`);
 
       dispatch(uploadProofOfPayment(order_id, amount));
     } catch (error) {
@@ -119,6 +120,7 @@ export const startUploadProofOfPayment = (data) => {
         errorNotify(error?.response?.data?.message);
         return;
       }
+      console.log(error, "error 5 order actions");
     }
   };
 };
@@ -149,6 +151,7 @@ export const startOrderCancel = (formData, order_id) => {
         return;
       }
       errorNotify("No se pudo cancelar la order - Intenta mas tarder");
+      console.log(error, "error 6 order actions");
     }
   };
 };
@@ -179,15 +182,16 @@ export const startCancelInvoice = (formData, order_id) => {
         return;
       }
       errorNotify("No se pudo cancelar la order - Intenta mas tarder");
+      console.log(error, "error 7 order actions");
     }
   };
 };
 
-const cancelInvoice = (order) =>({
+const cancelInvoice = (order) => ({
   type: types.cancel_invoice,
   payload: {
-    order
-  }
+    order,
+  },
 });
 
 export const startGetOrder = (_id, token) => {
@@ -199,10 +203,10 @@ export const startGetOrder = (_id, token) => {
           Authorization: token,
         },
       });
-      dispatch(getOrder(data.order, data?.shipping, data?.payments ?? []), console.log(data));
+      dispatch(getOrder(data.order, data?.shipping, data?.payments ?? []));
       return true;
     } catch (error) {
-      console.log(error);
+      console.log(error, "error 8 order actions");
       return false;
     }
   };
@@ -231,6 +235,7 @@ export const startInvoidedOrder = (order_id, status) => {
         icon: "success",
       });
     } catch (error) {
+      console.log(error, "error 9 order actions");
       Swal.fire({
         title: "Vaya ... Hubo un error",
         text: "Contacta al equipo de soporte o verifica tus datos fiscales",
@@ -267,6 +272,7 @@ export const startCancelOrderByID = (order_id) => {
         icon: "success",
       });
     } catch (error) {
+      console.log(error, "error 10 order actions");
       if (axios.isAxiosError(error)) {
         return Swal.fire({
           title: "Vaya ... Hubo un error",
@@ -289,7 +295,6 @@ const cancelOrderByID = (order) => ({
   payload: order,
 });
 
-
 export const loadProductDetail = (product) => ({
   type: types.load_product_detail,
   payload: product,
@@ -307,25 +312,24 @@ export const getStartedSendImagesToCanvas = (formData) => {
         },
       });
       successNotify(data?.message);
-      dispatch(startSendImagesToCanvas(data.order))
+      dispatch(startSendImagesToCanvas(data.order));
       return true;
     } catch (error) {
-
+      console.log(error, "error 11 order actions");
       if (axios.isAxiosError(error)) {
         errorNotify(error.response.data.message);
         return false;
       }
-      errorNotify("Parece que hubo un error - Intenta más tarde")
+      errorNotify("Parece que hubo un error - Intenta más tarde");
       return false;
-
     }
-  }
-}
+  };
+};
 
 const startSendImagesToCanvas = (order) => ({
   type: types.start_send_images_to_canvas,
-  payload: order
-})
+  payload: order,
+});
 
 export const startFinishOrderCanvas = (formData, order_id) => {
   return async (dispatch) => {
@@ -341,20 +345,21 @@ export const startFinishOrderCanvas = (formData, order_id) => {
       successNotify(data?.message);
       return true;
     } catch (error) {
+      console.log(error, "error 13 order actions");
       if (axios.isAxiosError(error)) {
         errorNotify(error.response.data.message);
         return false;
       }
-      errorNotify("Parece que hubo un error - Intenta más tarde")
+      errorNotify("Parece que hubo un error - Intenta más tarde");
       return false;
     }
-  }
-}
+  };
+};
 const finishOrderCanvas = (order) => ({
   type: types.finish_order_canvas,
-  payload: order
-})
-export const getChangePaymenMethod = ( order_id) => {
+  payload: order,
+});
+export const getChangePaymenMethod = (order_id) => {
   return async (dispatch) => {
     try {
       const token = Cookies.get("token");
@@ -367,22 +372,23 @@ export const getChangePaymenMethod = ( order_id) => {
       dispatch(changedPaymentMethod(data));
       return true;
     } catch (error) {
+      console.log(error, "error 14 order actions");
       if (axios.isAxiosError(error)) {
         errorNotify(error.response.data.message);
         return false;
       }
-      errorNotify("Parece que hubo un error - Intenta más tarde")
+      errorNotify("Parece que hubo un error - Intenta más tarde");
       return false;
     }
-  }
-}
+  };
+};
 
 const changedPaymentMethod = (order) => ({
   type: types.changed_payment_method,
-  payload: order
-})
+  payload: order,
+});
 
 export const getOrderId = (order_id) => ({
   type: types.get_order_id,
   payload: order_id,
-})
+});

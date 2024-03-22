@@ -1,38 +1,61 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { wrapper } from '../../../src/store';
-import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { wrapper } from "../../../src/store";
+import Swal from "sweetalert2/dist/sweetalert2.js";
 
 // actions
 import { startLoadFaqsCategories } from "../../../src/actions/faqsActions";
 
-import { startLoadAdministrableLogo } from '../../../src/actions/administrableActions';
-import { selectedOrderPendding, startLoadOrdersCanceled, startLoadPendingOrders, startLoadOrdersApproved, startLoadOrdersShipped, 
-  shippedOrders, loadProductDetail, getOrderId } from "../../../src/actions/ordersActions";
+import { startLoadAdministrableLogo } from "../../../src/actions/administrableActions";
+import {
+  selectedOrderPendding,
+  startLoadOrdersCanceled,
+  startLoadPendingOrders,
+  startLoadOrdersApproved,
+  startLoadOrdersShipped,
+  shippedOrders,
+  loadProductDetail,
+  getOrderId,
+} from "../../../src/actions/ordersActions";
 
-{/** Custom Hooks */ }
+{
+  /** Custom Hooks */
+}
 import { useToggle } from "../../../src/hooks/useToggle";
 
-{/* Components import */ }
-import Layout from '../../../src/components/Layouts'
+{
+  /* Components import */
+}
+import Layout from "../../../src/components/Layouts";
 import { Modal } from "../../../src/components/ui/modal";
-import { BannerImage } from '../../../src/components/ui/bannerImage';
+import { BannerImage } from "../../../src/components/ui/bannerImage";
 import { UploadProofOfPayment } from "../../../src/components/checkout/uploadProofOfPayment";
-import { PendingPaymentOrderIndex } from "../../../src/components/orders/pendingOrderPayment"
+import { PendingPaymentOrderIndex } from "../../../src/components/orders/pendingOrderPayment";
 import { NotFoundOrders } from "../../../src/components/orders/notFoundOrders";
 
 import { useFormik } from "formik";
-import * as Yup from 'yup';
+import * as Yup from "yup";
 
-import { Breadcrumbs, Grid, Rating, TextareaAutosize, Typography, Tabs, Tab, Box } from "@mui/material";
-import Cookies from 'js-cookie';
+import {
+  Breadcrumbs,
+  Grid,
+  Rating,
+  TextareaAutosize,
+  Typography,
+  Tabs,
+  Tab,
+  Box,
+} from "@mui/material";
+import Cookies from "js-cookie";
 
 import { customIcons } from "../../../src/staticData/customIcons";
 import { tabsData } from "../../../src/staticData/ordersTabsData";
 
-{/**Helpers */ }
+{
+  /**Helpers */
+}
 import helpersProducts from "../../../src/helpers/helpersProducts";
 import { startSendReview } from "../../../src/actions/reviewsActions";
 import FormCancelInvoice from "../../../src/components/orders/pendingOrderPayment/FormCancelInvoice";
@@ -42,11 +65,10 @@ import UploadImages from "../../../src/components/orders/UploadImages";
 import { startLoadCurrencies } from "../../../src/actions/countryAcctions";
 import { startLoadFiscalAddress } from "../../../src/actions/profileActions";
 
-
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -60,11 +82,7 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <div className="pt-10 mt-5 w-full">
-          {children}
-        </div>
-      )}
+      {value === index && <div className="pt-10 mt-5 w-full">{children}</div>}
     </div>
   );
 }
@@ -75,19 +93,25 @@ function IconContainer(props) {
 }
 
 const MisPedidos = () => {
-
   const router = useRouter();
   const dispatch = useDispatch();
-  const { penddingOrders, canceledOrders, approvedOrders, shippedOrders, success, changemethod } = useSelector((state) => state.orders);
+  const {
+    penddingOrders,
+    canceledOrders,
+    approvedOrders,
+    shippedOrders,
+    success,
+    changemethod,
+  } = useSelector((state) => state.orders);
 
-  const { categories } = useSelector((state) => state.faqs)
+  const { categories } = useSelector((state) => state.faqs);
 
   const reloadData = async () => {
-    const token = Cookies.get('token')
+    const token = Cookies.get("token");
     await dispatch(startLoadOrdersApproved(token));
     await dispatch(startLoadOrdersShipped(token));
     await dispatch(startLoadPendingOrders(token));
-  }
+  };
 
   useEffect(() => {
     if (success) {
@@ -97,28 +121,29 @@ const MisPedidos = () => {
 
   useEffect(() => {
     reloadData();
-    if (router.query.redirect_status === 'succeeded' || router.query.successTransfer === 'true') {
+    if (
+      router.query.redirect_status === "succeeded" ||
+      router.query.successTransfer === "true"
+    ) {
       Cookies.remove("client_secret");
       Swal.fire({
-        icon: "success",  
+        icon: "success",
         title: "Venta finalizada con éxito",
         text: "Te invitamos a leer nuestras políticas de privacidad, para cualquier duda o aclaración.",
         confirmButtonText: "Cerrar",
         cancelButtonColor: "#1565c0",
         allowOutsideClick: false,
       }).then(() => {
-        
         router.push(
           {
             pathname: router.path,
           },
           undefined,
-          { shallow: true },
+          { shallow: true }
         );
       });
     }
   }, []);
-
 
   const [valueTab, setValueTab] = useState(0);
   const [testimonialModal, setTestimonialModal] = useState(false);
@@ -132,56 +157,55 @@ const MisPedidos = () => {
 
   const initialValues = {
     qualification: 4,
-    review: '',
-  }
+    review: "",
+  };
 
   const validationSchema = {
     review: Yup.string().required("La reseña es requerida"),
-  }
+  };
 
   const handleSendReview = async (formData) => {
     await startSendReview(formData);
     handleCloseTestimonialArea();
-  }
+  };
 
   const formik = useFormik({
     initialValues,
     validationSchema: Yup.object(validationSchema),
     onSubmit: (formData) => {
       handleSendReview(formData);
-    }
+    },
   });
 
-  const handleCancelInvoice = (id = '1') => {
+  const handleCancelInvoice = (id = "1") => {
     toggleCancelInvoice();
-  }
+  };
 
   const handleChangeTab = (event, newValue) => {
     setValueTab(newValue);
-  }
+  };
 
   const handleOpenProofOfPayment = (order_id, total, totalPayments) => {
     toggleProofOfPayment();
     if (order_id && total) {
       dispatch(selectedOrderPendding(order_id, total, totalPayments));
     }
-
-  }
+  };
 
   const handleCloseTestimonialArea = () => {
     setTestimonialModal(false);
-    Cookies.set('modalTestimonialOpen', false);
-  }
+    Cookies.set("modalTestimonialOpen", false);
+  };
 
   useEffect(() => {
-    const modalTestimonialOpen = Cookies.get('modalTestimonialOpen');
+    const modalTestimonialOpen = Cookies.get("modalTestimonialOpen");
     if (modalTestimonialOpen && modalTestimonialOpen === "false") {
       setTestimonialModal(false);
     }
   }, []);
 
   useEffect(() => {
-    const modalTestimonialOpen = Cookies.get('modalTestimonialOpen');
+    const modalTestimonialOpen = Cookies.get("modalTestimonialOpen");
     if (approvedOrders.length > 0 && !modalTestimonialOpen) {
       setTestimonialModal(true);
       return;
@@ -190,23 +214,18 @@ const MisPedidos = () => {
 
   const handleOpenProductDetail = (product) => {
     toggleProductDetail();
-    dispatch(loadProductDetail(product))
-  }
+    dispatch(loadProductDetail(product));
+  };
 
   const handleOpenUploadImages = (product, order_id) => {
     toggleUploadImages();
-    dispatch(loadProductDetail(product))
-    dispatch(getOrderId(order_id))
-  }
+    dispatch(loadProductDetail(product));
+    dispatch(getOrderId(order_id));
+  };
 
   return (
-    <Layout
-      categories={categories}
-    >
-      <BannerImage
-        title="Mis Pedidos"
-        banner="bg-banner14"
-      />
+    <Layout categories={categories}>
+      <BannerImage title="Mis Pedidos" banner="bg-banner14" />
       {loading && <LoadingScreen />}
       <section className="container max-w-[1200px] my-10 mx-auto min-h-screen">
         <Grid container>
@@ -215,15 +234,20 @@ const MisPedidos = () => {
               <Link underline="hover" color="inherit" href="/">
                 Inicio
               </Link>
-              <Link underline="hover" color="inherit" href="/perfil" className="">
+              <Link
+                underline="hover"
+                color="inherit"
+                href="/perfil"
+                className=""
+              >
                 Perfil
               </Link>
               <Typography color="text.primary">Mis Pedidos</Typography>
             </Breadcrumbs>
           </Grid>
         </Grid>
-        <Box sx={{ width: '100%', marginTop: '20px' }}>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{ width: "100%", marginTop: "20px" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Tabs
               value={valueTab}
               onChange={handleChangeTab}
@@ -238,108 +262,90 @@ const MisPedidos = () => {
                   {...a11yProps(index)}
                   className="font-Poppins text-medium leading-[1.9]"
                 />
-              )
-              )}
+              ))}
             </Tabs>
           </Box>
-          
+
           <TabPanel value={valueTab} index={0}>
-            {
-              !shippedOrders.length ?
-                <NotFoundOrders
-                  text="No cuentas con ordenes enviadas"
+            {!shippedOrders.length ? (
+              <NotFoundOrders text="No cuentas con ordenes enviadas" />
+            ) : (
+              shippedOrders.map((order) => (
+                <PendingPaymentOrderIndex
+                  key={order._id}
+                  order={order}
+                  status={3}
+                  text_description="Pedido Enviado"
+                  text_color="text-[#333]"
+                  loading={loading}
+                  setLoading={setLoading}
+                  handleOpenProductDetail={handleOpenProductDetail}
+                  handleOpenUploadImages={handleOpenUploadImages}
                 />
-                :
-                shippedOrders.map(order => (
-                  <PendingPaymentOrderIndex
-                    key={order._id}
-                    order={order}
-                    status={3}
-                    text_description="Pedido Enviado"
-                    text_color="text-[#333]"
-                    loading={loading}
-                    setLoading={setLoading}
-                    handleOpenProductDetail={handleOpenProductDetail}
-                    handleOpenUploadImages={handleOpenUploadImages}
-                  />
-                ))
-            }
+              ))
+            )}
           </TabPanel>
           <TabPanel value={valueTab} index={1}>
-            {
-              !approvedOrders.length ?
-                <NotFoundOrders
-                  text="No cuentas con ordenes aprobadas"
+            {!approvedOrders.length ? (
+              <NotFoundOrders text="No cuentas con ordenes aprobadas" />
+            ) : (
+              approvedOrders.map((order) => (
+                <PendingPaymentOrderIndex
+                  key={order._id}
+                  order={order}
+                  status={2}
+                  handleCancelInvoice={handleCancelInvoice}
+                  text_description="Pedido Aprobado"
+                  text_color="text-[#333]"
+                  loading={loading}
+                  setLoading={setLoading}
+                  handleOpenProductDetail={handleOpenProductDetail}
+                  handleOpenUploadImages={handleOpenUploadImages}
                 />
-                :
-                approvedOrders.map(order => (
-                  <PendingPaymentOrderIndex
-                    key={order._id}
-                    order={order}
-                    status={2}
-                    handleCancelInvoice={handleCancelInvoice}
-                    text_description="Pedido Aprobado"
-                    text_color="text-[#333]"
-                    loading={loading}
-                    setLoading={setLoading}
-                    handleOpenProductDetail={handleOpenProductDetail}
-                    handleOpenUploadImages={handleOpenUploadImages}
-                  />
-                ))
-
-            }
+              ))
+            )}
           </TabPanel>
           <TabPanel value={valueTab} index={2}>
-            {
-              !penddingOrders.length ?
-                <NotFoundOrders
-                  text="No cuentas con ordenes pendientes"
-
+            {!penddingOrders.length ? (
+              <NotFoundOrders text="No cuentas con ordenes pendientes" />
+            ) : (
+              penddingOrders.map((order) => (
+                <PendingPaymentOrderIndex
+                  key={order._id}
+                  order={order}
+                  changemethod={changemethod}
+                  handleOpenProofOfPayment={handleOpenProofOfPayment}
+                  openProofOfPayment={openProofOfPayment}
+                  status={0}
+                  text_description=" Pedido Pendiente de Pago"
+                  text_color="text-[#333]"
+                  loading={loading}
+                  setLoading={setLoading}
+                  handleOpenProductDetail={handleOpenProductDetail}
+                  handleOpenUploadImages={handleOpenUploadImages}
                 />
-                :
-                penddingOrders.map(order => (
-                  <PendingPaymentOrderIndex
-                    key={order._id}
-                    order={order}
-                    changemethod={changemethod}
-                    handleOpenProofOfPayment={handleOpenProofOfPayment}
-                    openProofOfPayment={openProofOfPayment}
-                    status={0}
-                    text_description=" Pedido Pendiente de Pago"
-                    text_color="text-[#333]"
-                    loading={loading}
-                    setLoading={setLoading}
-                    handleOpenProductDetail={handleOpenProductDetail}
-                    handleOpenUploadImages={handleOpenUploadImages}
-                  />
-                ))
-            }
-
+              ))
+            )}
           </TabPanel>
           <TabPanel value={valueTab} index={3}>
-            {
-              !canceledOrders.length ?
-                <NotFoundOrders
-                  text="No cuentas con ordenes canceladas"
+            {!canceledOrders.length ? (
+              <NotFoundOrders text="No cuentas con ordenes canceladas" />
+            ) : (
+              canceledOrders.map((order) => (
+                <PendingPaymentOrderIndex
+                  key={order._id}
+                  order={order}
+                  status={1}
+                  text_description="Pedido Cancelado"
+                  text_color="text-[#333]"
+                  loading={loading}
+                  setLoading={setLoading}
+                  handleOpenProductDetail={handleOpenProductDetail}
+                  handleOpenUploadImages={handleOpenUploadImages}
                 />
-                :
-                canceledOrders.map(order => (
-                  <PendingPaymentOrderIndex
-                    key={order._id}
-                    order={order}
-                    status={1}
-                    text_description="Pedido Cancelado"
-                    text_color="text-[#333]"
-                    loading={loading}
-                    setLoading={setLoading}
-                    handleOpenProductDetail={handleOpenProductDetail}
-                    handleOpenUploadImages={handleOpenUploadImages}
-                  />
-                ))
-            }
+              ))
+            )}
           </TabPanel>
-
-
         </Box>
         {/* modal comprobante de pago */}
         <Modal
@@ -348,7 +354,7 @@ const MisPedidos = () => {
           handleOpenCheckout={handleOpenProofOfPayment}
           actions={false}
           fullWidth={true}
-          maxWidth={'xs'}
+          maxWidth={"xs"}
         >
           <UploadProofOfPayment
             handleOpenProofOfPayment={handleOpenProofOfPayment}
@@ -364,7 +370,7 @@ const MisPedidos = () => {
           handleOpenCheckout={toggleCancelInvoice}
           actions={false}
           fullWidth={true}
-          maxWidth={'xs'}
+          maxWidth={"xs"}
         >
           <FormCancelInvoice />
         </Modal>
@@ -375,7 +381,7 @@ const MisPedidos = () => {
           handleOpenCheckout={toggleProductDetail}
           actions={false}
           fullWidth={true}
-          maxWidth={'md'}
+          maxWidth={"md"}
           showTitle={false}
         >
           <ProductDetail />
@@ -387,7 +393,7 @@ const MisPedidos = () => {
           handleOpenCheckout={toggleUploadImages}
           actions={false}
           fullWidth={true}
-          maxWidth={'md'}
+          maxWidth={"md"}
         >
           <UploadImages handleOpenUploadImages={handleOpenUploadImages} />
         </Modal>
@@ -404,10 +410,16 @@ const MisPedidos = () => {
             <form onSubmit={formik.handleSubmit} className="w-full">
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                 <div className="w-full flex justify-center flex-col ">
-                  <Typography variant="h3" className="leading-6 mb-7 text-center text-2xl font-Poppins text-[#333]">
+                  <Typography
+                    variant="h3"
+                    className="leading-6 mb-7 text-center text-2xl font-Poppins text-[#333]"
+                  >
                     ¿Qué tal te parecio nuestro servicio?
                   </Typography>
-                  <Typography variant="h4" className="leading-6 mb-7 text-center text-2xl font-Poppins text-[#888]">
+                  <Typography
+                    variant="h4"
+                    className="leading-6 mb-7 text-center text-2xl font-Poppins text-[#888]"
+                  >
                     Déjanos tu reseña
                   </Typography>
                 </div>
@@ -427,14 +439,16 @@ const MisPedidos = () => {
                 <div className="w-full mt-5">
                   <TextareaAutosize
                     placeholder="Ingresa tu comentario"
-                    style={{ width: '100%' }}
+                    style={{ width: "100%" }}
                     minRows={6}
                     name="review"
                     onChange={formik.handleChange}
                     className="p-5 border-[1px] border-solid border-[#888]"
                   />
                   {formik.touched.review && formik.errors.review ? (
-                    <span className="text-red-500 text-sm">{formik.errors.review}</span>
+                    <span className="text-red-500 text-sm">
+                      {formik.errors.review}
+                    </span>
                   ) : null}
                 </div>
               </Grid>
@@ -459,19 +473,20 @@ const MisPedidos = () => {
         </Modal>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export const getServerSideProps = wrapper.getServerSideProps((store) =>
-  async (ctx) => {
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (ctx) => {
     await store.dispatch(startLoadAdministrableLogo());
     await store.dispatch(startLoadFaqsCategories());
     await store.dispatch(startLoadPendingOrders(ctx.req.cookies.token));
     await store.dispatch(startLoadOrdersCanceled(ctx.req.cookies.token));
     await store.dispatch(startLoadOrdersApproved(ctx.req.cookies.token));
     await store.dispatch(startLoadOrdersShipped(ctx.req.cookies.token));
-    await store.dispatch(startLoadFiscalAddress(ctx.req.cookies.token));
+    // await store.dispatch(startLoadFiscalAddress(ctx.req.cookies.token));
     await store.dispatch(startLoadCurrencies());
-  })
+  }
+);
 
-export default MisPedidos
+export default MisPedidos;
