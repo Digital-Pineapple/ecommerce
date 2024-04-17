@@ -1,38 +1,48 @@
-import { memo, useState } from 'react';
+import { memo, useState } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import { addOneProduct, removeOneProduct } from "../../actions/wishListActions";
 import { helpers } from "../../helpers";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { notify } from "../../helpers/helpers";
 
 import { useCart } from "../../hooks/useCart";
 import ButtonGroup from "./buttonGroup";
-import { CircularProgress } from '@mui/material';
-import Image from 'next/image';
-import { useEffect } from 'react';
+import { Button, CircularProgress } from "@mui/material";
+import Image from "next/image";
+import { useEffect } from "react";
 
-import * as ga from '../../libs/ga/index';
+import * as ga from "../../libs/ga/index";
 export const ProductCard = memo(({ product }) => {
-
   const { logged } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
 
-  const { _id, name, price, url, quantity, discount } = product;
-
-  const { addProduct, productInCart, updateProductQuantity, handleChangeProductQuantity, quantity: inputQuantity, loading } = useCart(logged, 1, product, cart, undefined, true, 500);
+  const { _id, name, price, url, quantity, discount, brand } = product;
+  const {
+    addProduct,
+    productInCart,
+    updateProductQuantity,
+    handleChangeProductQuantity,
+    quantity: inputQuantity,
+    loading,
+  } = useCart(logged, 1, product, cart, undefined, true, 500);
 
   const history = useRouter();
   const dispatch = useDispatch();
 
-  const [isInWhisList, setisInWhisList] = useState(helpers.existInWishList(_id));
+  const [isInWhisList, setisInWhisList] = useState(
+    helpers.existInWishList(_id)
+  );
 
-  const { totalWithDiscountApply } = helpers.calculatNewTotalToPay(product.discount, product.price);
+  const { totalWithDiscountApply } = helpers.calculatNewTotalToPay(
+    product.discount,
+    product.price
+  );
 
   const sale_price = helpers.priceFormat(price);
   const sale_price_discount = helpers.priceFormat(totalWithDiscountApply);
@@ -41,7 +51,7 @@ export const ProductCard = memo(({ product }) => {
     history.push(`/productos/${url}`);
     ga.click(product);
   };
- 
+
   const handleToogleWishList = (_id) => {
     const { message, existInWishList } = helpers.toggleWishListProducts(_id);
     setisInWhisList(!isInWhisList);
@@ -52,35 +62,33 @@ export const ProductCard = memo(({ product }) => {
       dispatch(addOneProduct(_id));
     }
   };
-  
+  const text = `Hola! Me interesa comprar producto de Merry Color, me puedes brindar información por favor!`;
   return (
     <div className="mb-[30px] relative p-2 md:card animate__animated animate__zoomIn md:mx-2 shadow-md md:shadow-none">
       <div className="relative overflow-hidden">
         <div className="w-full h-full relative cursor-pointer">
-          {
-            product.multimedia.length > 0 ? (
-              <Image
-                src={product?.multimedia[0]?.images?.original}
-                alt={product.name}
-                width="320"
-                height="320"
-                priority="true"
-                fill="true"
-                sizes="(max-width: 768px) 100vw,
+          {product.multimedia.length > 0 ? (
+            <Image
+              src={product?.multimedia[0]?.images?.original}
+              alt={product.name}
+              width="320"
+              height="320"
+              priority="true"
+              fill="true"
+              sizes="(max-width: 768px) 100vw,
                         (max-width: 1200px) 50vw,
                         33vw"
-                onClick={handleShowProduct}
-              />
-            ) : (
-              <Image
-                src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
-                alt={product?.name}
-                width={100}
-                height={100}
-                layout="responsive"
-              />
-            )
-          }
+              onClick={handleShowProduct}
+            />
+          ) : (
+            <Image
+              src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+              alt={product?.name}
+              width={100}
+              height={100}
+              layout="responsive"
+            />
+          )}
           {/* <SliderProductCard
             images={product.multimedia}
             className="w-[20rem]"
@@ -108,9 +116,7 @@ export const ProductCard = memo(({ product }) => {
           </div>
         </div>
         {quantity <= 0 && (
-          <span
-            className="text-xs absolute bg-[#333] text-white md:px-6 px-4 py-1 rounded-r-lg top-0 font-bold"
-          >
+          <span className="text-xs absolute bg-[#333] text-white md:px-6 px-4 py-1 rounded-r-lg top-0 font-bold">
             Agotado
           </span>
         )}
@@ -156,67 +162,80 @@ export const ProductCard = memo(({ product }) => {
 
           <div className="flex flex-wrap justify-between items-center">
             <div className="btn-area">
-              {
+              {product.brand.name === "Merry Color" ? (
+                <a
+                  href={`https://wa.me/5534071275 ?text=${text}`}
+                  target="_blank"
+                >
+                  <Button variant="outlined">Me interesa</Button>
+                </a>
+              ) : (
                 product.quantity > 0 && (
                   <>
                     {!productInCart ? (
                       <>
-                      {
-                        loading ? (
-                          <CircularProgress
-                            size={20}
-                            className="ml-10"
-                         />
-                        ):(
-                          <button
-                          onClick={addProduct}
-                          className="bg-[#fff]
-                                          py-[8px] 
-                                          md:py-[10px]
-                                          px-[10px]
-                                          btn-add
-                                          md:px-[20px] 
-                                          cursor-pointer 
-                                          text-[#333] 
-                                          border-[#333] 
-                                          border-[1px] 
-                                          border-solid 
-                                          leading-normal 
-                                          rounded-lg 
-                                          font-normal 
-                                          uppercase 
-                                          text-[10px]
-                                          md:text-[11px]
-                                          lg:text-sm
-                                          hover:bg-[#333]
-                                          hover:text-white
-                                          transition-all duration-700 ease-in-out
-                                          "
-                        >
-                          <span
-                            className="flex items-center font-Poppins"
-                          >
-                            Agregar
-                          </span>
-                        </button>
-                        )
-                      }
+                        {loading ? (
+                          <CircularProgress size={20} className="ml-10" />
+                        ) : (
+                          <>
+                            {brand === "661ec63f3da7853a4983a3af" ? (
+                              <a
+                                href={`https://wa.me/5534071275?text=${text}`}
+                                target="_blank"
+                              >
+                                <Button variant="outlined">Me interesa</Button>
+                              </a>
+                            ) : (
+                              <>
+                                <button
+                                  onClick={addProduct}
+                                  className="bg-[#fff]
+                              py-[8px] 
+                              md:py-[10px]
+                              px-[10px]
+                              btn-add
+                              md:px-[20px] 
+                              cursor-pointer 
+                              text-[#333] 
+                              border-[#333] 
+                              border-[1px] 
+                              border-solid 
+                              leading-normal 
+                              rounded-lg 
+                              font-normal 
+                              uppercase 
+                              text-[10px]
+                              md:text-[11px]
+                              lg:text-sm
+                              hover:bg-[#333]
+                              hover:text-white
+                              transition-all duration-700 ease-in-out
+                              "
+                                >
+                                  <span className="flex items-center font-Poppins">
+                                    Agregar
+                                  </span>
+                                </button>
+                              </>
+                            )}
+                          </>
+                        )}
                       </>
                     ) : (
                       <div>
                         <ButtonGroup
                           quantity={inputQuantity}
-                          increaseDecreaseQuantityProduct={updateProductQuantity}
+                          increaseDecreaseQuantityProduct={
+                            updateProductQuantity
+                          }
                           handleChangeQuantity={handleChangeProductQuantity}
                           product={product}
                         />
                       </div>
-                    )
-                    }
+                    )}
                   </>
                 )
-              }
-
+              )}
             </div>
             <div className="flex ">
               {/* <span
@@ -266,9 +285,8 @@ export const ProductCard = memo(({ product }) => {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 });
 
-
-ProductCard.displayName = 'ProductCard';
+ProductCard.displayName = "ProductCard";
