@@ -21,5 +21,6 @@ module.exports = {
   experimental: {
     //Este se tiene que descomentar para cuando se saca a produccion
     // outputStandalone: false,
+    outputStandalone: true,
   },
 };

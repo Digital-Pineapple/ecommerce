@@ -73,7 +73,7 @@ const Show = () => {
       priceCurrency: "MXN",
     },
   };
-
+  const text = `Hola! Me interesa comprar producto de Merry Color, me puedes brindar información por favor!`;
   return (
     <Layout
       title={`Wapizima - ${product?.name}`}
@@ -221,45 +221,64 @@ const Show = () => {
                   </>
                 )}
               </div>
-              <div className="mt-12 lg:mt-10">
-                {product?.product_type === "1" && product.quantity > 0 && (
-                  <div className="flex items-center mb-10">
-                    <ButtonGroup
-                      quantity={inputQuantity}
-                      increaseDecreaseQuantityProduct={updateProductQuantity}
-                      handleChangeQuantity={handleChangeProductQuantity}
-                      product={product}
-                    />
-
-                    <button
-                      className="h-[45px] top-[-2px] relative cursor-pointer border-[1px] border-solid border-[#333] flex items-center px-[25px] rounded-none uppercase hover:bg-[#333] hover:text-secondary transition-all duration-700 ease-in-out text-xs ml-2 md:ml-5 md:text-[14px] md:text-xs"
-                      onClick={addProduct}
-                    >
-                      {loading ? (
-                        <>
-                          <CircularProgress size={25} />{" "}
-                          <p className="ml-5">Agregando...</p>
-                        </>
-                      ) : (
-                        <>
-                          <ShoppingCartIcon /> Añadir a carrito
-                        </>
-                      )}
-                    </button>
-                  </div>
-                )}
-                {product?.quantity > 0 && (
-                  <button
-                    className="bg-[#333] border-2 text-white py-4 w-full font-bold
-                            transition-all duration-700 ease-in-out
-                            hover:bg-[#000]
-                            "
-                    onClick={() => handleClickRedirectCart()}
+              {product.brand._id === "661ec63f3da7853a4983a3af" ? (
+                <>
+                  <a
+                    href={`https://wa.me/5534071275?text=${text}`}
+                    target="_blank"
+                    rel="noreferrer"
                   >
-                    COMPRAR AHORA!
-                  </button>
-                )}
-              </div>
+                    <button
+                      className="bg-[#333] border-2 text-white py-4 w-full font-bold
+                        transition-all duration-700 ease-in-out
+                        hover:bg-[#000]
+                        "
+                    >
+                      Me interesa
+                    </button>
+                  </a>
+                </>
+              ) : (
+                <div className="mt-12 lg:mt-10">
+                  {product?.product_type === "1" && product.quantity > 0 && (
+                    <div className="flex items-center mb-10">
+                      <ButtonGroup
+                        quantity={inputQuantity}
+                        increaseDecreaseQuantityProduct={updateProductQuantity}
+                        handleChangeQuantity={handleChangeProductQuantity}
+                        product={product}
+                      />
+
+                      <button
+                        className="h-[45px] top-[-2px] relative cursor-pointer border-[1px] border-solid border-[#333] flex items-center px-[25px] rounded-none uppercase hover:bg-[#333] hover:text-secondary transition-all duration-700 ease-in-out text-xs ml-2 md:ml-5 md:text-[14px] md:text-xs"
+                        onClick={addProduct}
+                      >
+                        {loading ? (
+                          <>
+                            <CircularProgress size={25} />{" "}
+                            <p className="ml-5">Agregando...</p>
+                          </>
+                        ) : (
+                          <>
+                            <ShoppingCartIcon /> Añadir a carrito
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                  {product?.quantity > 0 && (
+                    <button
+                      className="bg-[#333] border-2 text-white py-4 w-full font-bold
+                    transition-all duration-700 ease-in-out
+                    hover:bg-[#000]
+                    "
+                      onClick={() => handleClickRedirectCart()}
+                    >
+                      COMPRAR AHORA!
+                    </button>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           <div className="px-10 w-full break-words text-center">

@@ -164,8 +164,9 @@ export const ProductCard = memo(({ product }) => {
             <div className="btn-area">
               {product.brand.name === "Merry Color" ? (
                 <a
-                  href={`https://wa.me/5534071275 ?text=${text}`}
+                  href={`https://wa.me/5534071275?text=${text}`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   <Button variant="outlined">Me interesa</Button>
                 </a>
@@ -182,6 +183,7 @@ export const ProductCard = memo(({ product }) => {
                               <a
                                 href={`https://wa.me/5534071275?text=${text}`}
                                 target="_blank"
+                                rel="noreferrer"
                               >
                                 <Button variant="outlined">Me interesa</Button>
                               </a>
