@@ -4,6 +4,7 @@ import { Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
+import { Fab } from "@mui/material";
 /**tags */
 
 const PartnerArea = () => {

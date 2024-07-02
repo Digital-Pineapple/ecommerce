@@ -22,6 +22,7 @@
     "axios": "^0.25.0",
     "formik": "^2.2.9",
     "js-cookie": "^3.0.1",
+    "lovely-whatsapp-fab": "^1.0.2",
     "moment": "^2.29.3",
     "next": "^12.1.0",
     "next-redux-wrapper": "^7.0.5",
