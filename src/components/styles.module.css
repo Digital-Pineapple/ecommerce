@@ -17,19 +17,19 @@
   background: #e91e63;
 }
 
-.img{
-    animation-duration: 1.5s;
-    animation-name: slidein;
-    animation-iteration-count: infinite;
+.img {
+  animation-duration: 1.5s;
+  animation-name: slidein;
+  animation-iteration-count: infinite;
 }
-  @keyframes slidein {
-    from {
-      margin-left: 30%;
-      width: 50%
-    }
+@keyframes slidein {
+  from {
+    margin-left: 30%;
+    width: 50%;
+  }
 
-    to {
-      margin-left: 0%;
-      width: 50%;
-    }
+  to {
+    margin-left: 0%;
+    width: 50%;
+  }
 }

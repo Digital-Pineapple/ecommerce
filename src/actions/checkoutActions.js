@@ -95,6 +95,31 @@ export const startfinaliceTransferCheckout = (
   };
 };
 
+export const startSaveHeadlineCard = (card_name, token, currency) => {
+  return async (dispatch, getState) => {
+    const { order_id } = getState().cart;
+    const data = {
+      card_name,
+    };
+    try {
+      let url = `/orders/saveHeadLineCard/${order_id}`;
+      await client.post(url, data, {
+        headers: {
+          Authorization: token,
+          currency: currency,
+        },
+      });
+      dispatch(finaliceSaveHeadlineCard());
+    } catch (error) {
+      console.log(error, "ocurrio un error save Head");
+    }
+  };
+};
+
 export const finaliceTransferCheckout = () => ({
   type: types.successFinaliceTransfer,
+});
+
+export const finaliceSaveHeadlineCard = () => ({
+  type: types.saveHeadLine,
 });

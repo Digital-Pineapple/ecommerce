@@ -130,8 +130,8 @@ const FormAddress = ({ toggle }) => {
     municipality: Yup.string().required("El municipio es requerido"),
     colony: Yup.string().required("El municipio es requerido"),
     phone_number: Yup.string()
-      .min(9, "El número telefónico debe ser mayor o igual a 9 dígitos")
-      .max(11, "El número telefómnico no pueder ser mayor a 11 dígitos")
+      .min(10, "El número telefónico debe ser mayor o igual a 10 dígitos")
+      .max(10, "El número telefónico no pueder ser mayor a 10 dígitos")
       .required("El numero de telefono es requerido"),
     prefix: Yup.string().required("El código de país es requerido"),
   };

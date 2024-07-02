@@ -136,6 +136,7 @@ export const types = {
   addDirectionInCart: "[ShoppingCart] add direction in cart",
   addAddressSelected: "[ShoppingCart] load shipping Address selected",
   successFinaliceTransfer: "[ShoppingCart] successFinaliceTrasfer",
+  saveHeadLine: "[ShoppingCart] saveHeadLine",
 
   load_faqs: "[FAQS] load_faqs",
   load_faqs_categories: "[FAQS] load faqs categories",
