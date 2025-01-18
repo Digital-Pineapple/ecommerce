@@ -190,7 +190,7 @@ const Show = () => {
                       {product?.tags.map((tag) => (
                         <div
                           key={tag?.tag_id?._id}
-                          className="bg-[#333] rounded-3xl px-4 py-1 mr-2 cursor-pointer "
+                          className="bg-wapicolor-600 rounded-3xl px-4 py-1 mr-2 cursor-pointer "
                         >
                           <span className="text-secondary font-medium text-xs duration-500 flex items-center justify-center text-center">
                             {tag?.tag_id?.name}
@@ -250,7 +250,7 @@ const Show = () => {
                       />
 
                       <button
-                        className="h-[45px] top-[-2px] relative cursor-pointer border-[1px] border-solid border-[#333] flex items-center px-[25px] rounded-none uppercase hover:bg-[#333] hover:text-secondary transition-all duration-700 ease-in-out text-xs ml-2 md:ml-5 md:text-[14px] md:text-xs"
+                        className="h-[45px] top-[-2px] relative cursor-pointer border-[1px] border-solid border-wapicolor-600 flex items-center px-[25px] rounded-none uppercase hover:bg-wapicolor-600 text-wapicolor-600 hover:text-secondary transition-all duration-700 ease-in-out text-xs ml-2 md:ml-5 md:text-[14px] md:text-xs"
                         onClick={addProduct}
                       >
                         {loading ? (
@@ -268,10 +268,10 @@ const Show = () => {
                   )}
                   {product?.quantity > 0 && (
                     <button
-                      className="bg-[#333] border-2 text-white py-4 w-full font-bold
-                    transition-all duration-700 ease-in-out
-                    hover:bg-[#000]
-                    "
+                      className="bg-wapicolor-600 border-2 text-white py-4 w-full font-bold
+                            transition-all duration-700 ease-in-out
+                            hover:bg-wapicolor-800
+                            "
                       onClick={() => handleClickRedirectCart()}
                     >
                       COMPRAR AHORA!

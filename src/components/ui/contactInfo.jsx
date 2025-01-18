@@ -1,7 +1,7 @@
 export const ContactInfo = ({ icon, title, text, phonetwo, phone }) => {
   return (
     <div className="w-full flex flex-wrap pb-[42px] items-center">
-      <span className="w-[60px] text-[#222] text-center text-lg">
+      <span className="w-[60px] text-wapicolor-600 text-center text-lg">
         <span value={{ className: "text-[25px] text-[#888] w-[35%]" }}>
           {icon}
         </span>

@@ -89,7 +89,7 @@ const ContactUs = () => {
             <div className="flex flex-wrap">
               <div className="border-solid border-[2px] border-[#e6e6e6] w-full lg:w-1/2 xl:w-1/2 p-16 flex justify-center flex-wrap items-center">
                 <form className="w-full" onSubmit={formik.handleSubmit}>
-                  <h4 className="font-Poppins text-[24px] leading-[1.5] text-[#333] text-center pb-[30px]">
+                  <h4 className="font-Poppins text-[24px] leading-[1.5] text-wapicolor-600 text-center pb-[30px]">
                     Envianos un mensaje
                   </h4>
                   <div className="mb-6">
@@ -159,7 +159,7 @@ const ContactUs = () => {
                     ) : null}
                   </div>
                   <button
-                    className="bg-[#222] w-full text-white py-4 uppercase hover:bg-[#333] border-2 border-[#222] transition-all duration-700 ease-in-out"
+                    className="bg-white w-full text-wapicolor-600 py-4 uppercase border border-wapicolor-700 border-b-8 transition-all duration-700 ease-in-out  hover:bg-wapicolor-600 hover:text-luz rounded-md font-semibold"
                     type="submit"
                   >
                     Enviar

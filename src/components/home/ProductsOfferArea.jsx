@@ -8,7 +8,7 @@ const ProductsOfferArea = () => {
                     <h2 className="text-4xl font-bold mt-0 mb-2  font-['Poppins']"> No lo pienses más y se parte de la mejor escuela de uñas de México.</h2>
                     <p className="mb-6 text-xl text-[#222] leading-normal  font-['Poppins']">Regístrate en nuestra academia de cursos online y adquiere más conocimiento.</p>
                     <Link href="https://wapizima.com.mx">
-                        <a target="_blank" className="bg-[#222] text-luz px-8 py-3 uppercase  font-['Poppins']  transition duration-700 ease-in-out cursor-pointer">Registrate</a>
+                        <a target="_blank" className="bg-wapicolor-600 text-luz px-8 py-3 uppercase  font-['Poppins']  transition duration-700 ease-in-out cursor-pointer">Registrate</a>
                     </Link>
                 </div>
             </div>

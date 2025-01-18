@@ -64,7 +64,7 @@ export const ProductCard = memo(({ product }) => {
   };
   const text = `Hola! Me interesa comprar producto de Merry Color, me puedes brindar información por favor!`;
   return (
-    <div className="mb-[30px] relative p-2 md:card animate__animated animate__zoomIn md:mx-2 shadow-md md:shadow-none">
+    <div className="mb-[30px] relative p-2 md:card animate__animated animate__zoomIn md:mx-2 shadow-md md:shadow-md border md:border-2 md:border-b-4 border-custom-pink rounded-xl">
       <div className="relative overflow-hidden">
         <div className="w-full h-full relative cursor-pointer">
           {product.multimedia.length > 0 ? (
@@ -192,27 +192,27 @@ export const ProductCard = memo(({ product }) => {
                                 <button
                                   onClick={addProduct}
                                   className="bg-[#fff]
-                              py-[8px] 
-                              md:py-[10px]
-                              px-[10px]
-                              btn-add
-                              md:px-[20px] 
-                              cursor-pointer 
-                              text-[#333] 
-                              border-[#333] 
-                              border-[1px] 
-                              border-solid 
-                              leading-normal 
-                              rounded-lg 
-                              font-normal 
-                              uppercase 
-                              text-[10px]
-                              md:text-[11px]
-                              lg:text-sm
-                              hover:bg-[#333]
-                              hover:text-white
-                              transition-all duration-700 ease-in-out
-                              "
+                                  py-[8px] 
+                                  md:py-[10px]
+                                  px-[10px]
+                                  btn-add
+                                  md:px-[20px] 
+                                  cursor-pointer 
+                                  text-wapicolor-700 
+                                  border-wapicolor-700 
+                                  border-[2px] 
+                                  border-solid 
+                                  leading-normal 
+                                  rounded-lg 
+                                  font-medium 
+                                  uppercase 
+                                  text-[10px]
+                                  md:text-[11px]
+                                  lg:text-sm
+                                  hover:bg-wapicolor-700
+                                  hover:text-white
+                                  transition-all duration-700 ease-in-out
+                                  "
                                 >
                                   <span className="flex items-center font-Poppins">
                                     Agregar

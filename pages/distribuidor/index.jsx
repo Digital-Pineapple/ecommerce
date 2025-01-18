@@ -40,24 +40,24 @@ const Distributor = () => {
       <section className="flex justify-center container mx-auto my-20 lg:px-24 font-Poppins">
         <div className="grid grid-cols-1 md:grid-cols-3">
           <div className="px-5">
-            <div className="border-2 border-gray-200 rounded-lg py-16 px-2 shadow-md flex flex-col items-center hover:bg-gray-50 cursor-pointer">
+            <div className="border-2 border-b-8 rounded-lg py-16 px-2 shadow-md flex flex-col items-center hover:bg-pink-200 cursor-pointer border-wapicolor-600 group">
               <Image
                 src="/assets/icons/logistic-truck-icon.svg"
                 alt="Distribuidor"
                 width={120}
                 height={120}
               />
-              <h2 className="text-4xl mt-8 mb-10 font-bold text-center">Convierte en distribuidor</h2>
-              <p className="text-center text-lg text-gray-600 mb-10 px-4">
+              <h2 className="text-4xl mt-8 mb-10 font-bold text-center group-hover:text-luz">Convierte en distribuidor</h2>
+              <p className="text-center text-lg text-wapicolor-600 mb-10 px-4">
                 Forma parte de nuestra red de distribuidores y goza de los grandes beneficios que Wapizima tiene para ti.
               </p>
             </div>
           </div>
           <div className="col-span-2 mt-26 lg:mt-0">
-            <div className="overflow-auto px-5 lg:overflow-visible border-2 border-gray-200 rounded-lg py-16 md:px-10 shadow-md flex flex-col items-center hover:bg-gray-50">
-              <h2 className="text-4xl font-semibold text-center mb-10">Aprovecha los descuentos de distribuidor</h2>
+            <div className="overflow-auto px-5 lg:overflow-visible border-2 border-wapicolor-600 border-b-8 rounded-lg py-16 md:px-10 shadow-md flex flex-col items-center hover:bg-wapicolor-200 group">
+              <h2 className="text-4xl font-semibold text-center mb-10 text-wapicolor-600 group-hover:text-luz">Aprovecha los descuentos de distribuidor</h2>
               <table className="w-full text-sm text-left text-gray-500">
-                <thead className="text-xs text-white uppercase bg-[#333]">
+                <thead className="text-xs text-white uppercase bg-wapicolor-500">
                   <tr>
                     <th scope="col" className="py-3 md:px-6 px-2">
                       AL COMPRAR

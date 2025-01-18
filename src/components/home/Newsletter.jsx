@@ -26,17 +26,30 @@ const Newsletter = () => {
   return (
     <section className="border-t-2  border-[#f6f6f6] border-solid py-16">
       <div className="w-full m-auto px-3">
-        <div className="grid grid-cols-1 lg:grid-cols-2 px-5 md:px-10 lg:px-20  items-center">
-          <div className="w-full mb-10 md:px-2">
-            <h2 className="text-lg uppercase font-semibold  font-['Poppins']">Suscribete a Nuestro Newsletter</h2>
-            <p className="text-base text-[#666] font-['Poppins']">Suscribete para recibir nuestras promociones , ofertas y nuevos productos que están por salir.</p>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 px-5 items-center  ">
+          <div className="w-full  md:px-2 py-1">
+            <div className="relative overflow-hidden  rounded-lg ">
+            <div className="absolute inset-0 bg-wapicolor-700/80 blur "></div>
+              <div className="relative z-10 p-4   rounded-lg">
+                <div className="mx-auto ">
+                  <div className="w-full mb-4 md:px-2 ">
+                    <h2 className="text-xl  uppercase font-semibold font-['Poppins'] text-white mb-4">
+                      Suscríbete a Nuestro Newsletter
+                    </h2>
+                    <p className="text-base md:text-lg text-white/80 font-['Poppins']">
+                      Suscríbete para recibir nuestras promociones, ofertas y nuevos productos que están por salir.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> 
           <div className="flex">
             <form onSubmit={formik.handleSubmit} className="w-full flex">
               <input name="email" type="text" placeholder="Ingresa tu correo electronico" value={formik.values.email}
-                onChange={formik.handleChange} className="bg-[#f5f5f5] w-full py-4 px-10 text-sm leading-normal text-[#222] border-none rounded-none transition-all outline-none" />
+                onChange={formik.handleChange} className="bg-wapicolor-50 w-full py-4 px-10 text-sm leading-normal text-wapicolor-900  border border-b-4 border-wapicolor-500 rounded-none transition-all outline-wapicolor-400 placeholder-wapicolor-500 outline-2 " />
 
-              <button type="submit" className="border-none bg-[#333] ml-2 lg:ml-5 text-[#fff] px-2 md:px-5 text-[16px] transition-all">Suscribirme</button>
+              <button type="submit" className="border border-b-4 rounded-md border-wapicolor-500 bg-white ml-2 lg:ml-5 text-wapicolor-400 px-2 md:px-5 text-[16px] transition-all hover:bg-wapicolor-600 hover:text-white hover:border-wapicolor-800">Suscribirme</button>
             </form>
           </div>
         </div>
