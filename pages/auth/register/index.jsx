@@ -12,7 +12,7 @@ const Register = () => {
       <section className="min-h-screen container mx-auto font-Poppins">
         <div className="grid grid-cols-1 lg:grid-cols-2 my-32 lg:my-40">
           <div className="px-10 lg:px-28">
-            <h1 className="uppercase font-bold text-3xl mb-5">Crear Cuenta</h1>
+            <h1 className="uppercase font-bold text-3xl mb-5 text-wapicolor-600 ">Crear Cuenta</h1>
             <h2>Entérate primero que nadie de ofertas especiales, novedades, eventos y más</h2>
             <FormSignUp />
           </div>

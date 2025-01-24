@@ -21,13 +21,13 @@ export const Cart = () => {
               <table className="min-w-full leading-normal font-Poppins border-collapse">
                 <thead>
                   <tr>
-                    <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">
+                    <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">
                       Producto
                     </th>
-                    <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Existente</th>
-                    <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Cantidad</th>
-                    <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Subtotal</th>
-                    <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">
+                    <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Existente</th>
+                    <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Cantidad</th>
+                    <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Subtotal</th>
+                    <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">
                       Opciones
                     </th>
                   </tr >

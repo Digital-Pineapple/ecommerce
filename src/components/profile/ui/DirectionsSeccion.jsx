@@ -54,25 +54,25 @@ const DirectionsSeccion = ({ directions, toggleSelectCountry, showForm, setShowF
                 !showForm ? (
                     <>
                         <div
-                            className="border-2 border-gray-400 mt-5 w-11/12 mx-auto h-72 md:mr-4 cursor-pointer overflow-hidden flex flex-col items-center justify-center border-dashed rounded-md"
+                            className="border-2 border-wapicolor-400 mt-5 w-11/12 mx-auto h-72 md:mr-4 cursor-pointer overflow-hidden flex flex-col items-center justify-center border-dashed rounded-md"
                             // onClick={() => { setShowForm(true); dispatch(clearDirection()); setIsEditing(false) }}
                             onClick={toggleSelectCountry}
                         >
                             <div>
                                 <AddIcon 
-                                    className = "text-[#888] text-5xl"
+                                    className = "text-wapicolor-600 text-5xl"
                                 />
                             </div>
                             <div>
-                                <h2 className="text-xl font-semibold font-Poppins">Agregar Dirección</h2>
+                                <h2 className="text-xl font-semibold font-Poppins text-wapicolor-600">Agregar Dirección</h2>
                             </div>
                         </div>
                         {
                             directions?.map(direction => (
                                 <div key={direction?._id}
-                                    className="relative border-gray-300 border-2 mt-5 w-11/12 mx-auto h-72 h-auto md:mr-4 overflow-hidden flex flex-col font-Poppins rounded-md"
+                                    className="relative border-wapicolor-600  border-2 border-b-4 mt-5 w-11/12 mx-auto h-72 h-auto md:mr-4 overflow-hidden flex flex-col font-Poppins rounded-md"
                                 >
-                                    <div className="font-Poppins bg-[#eee] px-10 py-5">
+                                    <div className="font-Poppins bg-wapicolor-600 text-luz px-10 py-5">
                                         <p className="uppercase truncate">{direction.name}</p>
                                     </div>
                                     <div className="px-10 my-10 pb-14">

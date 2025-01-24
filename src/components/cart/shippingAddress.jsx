@@ -63,7 +63,7 @@ export const ShippingAddress = ({ toggleSelectCountry }) => {
                             >
                                 {
                                     address.map(({ label, value }) => (
-                                        <MenuItem key={label} value={value}>{label}</MenuItem>
+                                        <MenuItem  key={label} value={value}>{label}</MenuItem>
                                     ))
                                 }
                             </Select>
@@ -72,7 +72,7 @@ export const ShippingAddress = ({ toggleSelectCountry }) => {
                 }
                 {!Object.keys(addressSelected).length ? (
                     <button
-                        className="w-full bg-[#222] py-[5.5px] text-white ml-2 w-4/12 border-2 border-[#222]"
+                        className="w-full  bg-luz hover:bg-wapicolor-600 hover:text-luz py-2 text-wapicolor-600 py-[5.5px]  ml-2 w-4/12 border-2 border-b-4 border-wapicolor-600 rounded-md"
                         onClick={toggleSelectCountry}
                     >
                         Agregar

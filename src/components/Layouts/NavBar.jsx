@@ -181,10 +181,10 @@ const NavBar = () => {
             <div>
               <hr />
               <span
-                className="block pl-4 mb-5 cursor-pointer text-gray-900 hover:text-stone-900 hover:bg-gray-100 py-2 uppercase text-sm pr-28"
+                className="block pl-4 mb-5 cursor-pointer text-luz hover:text-stone-900 hover:bg-gray-100 py-2 uppercase text-sm pr-28 "
                 onClick={() => handleRedirectClick("/perfil")}
               >
-                <AccountCircleIcon className="mr-4" />
+                <AccountCircleIcon className="mr-4 p-8 border-4 text-luz" />
                 Mi cuenta
               </span>
               <span
@@ -296,18 +296,19 @@ const NavBar = () => {
                     </span>
                   ) : (
                     <Link href={path} key={name} prefetch={false}>
-                      <a target="_blank"
-                      className="text-luz border-transparent border-b-2 mx-4 cursor-pointer font-Poppins font-medium transition uppercase duration-700 ease-in-out hover:bg-white hover:text-wapicolor-600 px-2 py-1 rounded"
-                    >
-                      {name}
-                    </a>
+                      <a
+                        target="_blank"
+                        className="text-luz border-transparent border-b-2 mx-4 cursor-pointer font-Poppins font-medium transition uppercase duration-700 ease-in-out hover:bg-white hover:text-wapicolor-600 px-2 py-1 rounded"
+                      >
+                        {name}
+                      </a>
                     </Link>
                   )
                 )}
               </div>
             </div>
 
-            <div className="flex items-center mr-10">
+            <div className="flex items-center mr-10 ">
               <div>
                 {!router.pathname.includes("/perfil") &&
                   !router.pathname.includes("/checkout") && (
@@ -319,7 +320,7 @@ const NavBar = () => {
                   )}
               </div>
               {logged ? (
-                <span className="flex items-center">
+                <span className="flex items-center ">
                   <Button
                     id="basic-button"
                     aria-controls={openMenu ? "basic-menu" : undefined}
@@ -329,7 +330,7 @@ const NavBar = () => {
                     sx={{ color: "#333" }}
                     className="border-transparent border-b-2 mx-4 cursor-pointer text-lg font-['Poppins'] font-normal transition duration-700 ease-in-out"
                   >
-                    <AccountCircleIcon className="text-3xl" />
+                    <AccountCircleIcon className="text-3xl text-luz" />
                   </Button>
                   <Menu
                     id="basic-menu"
@@ -374,7 +375,7 @@ const NavBar = () => {
                         handleRedirectClick("/perfil");
                       }}
                       sx={{ paddingRight: 15, fontSize: "14px" }}
-                      className="hover:text-[#a31545]"
+                      className="hover:text-[#a31545] "
                     >
                       Mi Cuenta
                     </MenuItem>
@@ -437,7 +438,11 @@ const NavBar = () => {
               <span className="flex items-center border-transparent border-b-2 cursor-pointer text-luz  font-['Poppins'] font-normal xl:mx-2 transition duration-700 ease-in-out mr-5 hover:bg-white hover:text-wapicolor-600 p-1 rounded">
                 <Badge
                   badgeContent={wishList?.length}
-                  color="primary"
+                  componentsProps={{
+                    badge: {
+                      style: { backgroundColor: "#41cada", color: "white" }, // Estilo personalizado del badge
+                    },
+                  }}
                   onClick={() => handleRedirectClick("/mi-lista-de-deseos")}
                 >
                   <FavoriteBorderIcon />
@@ -480,7 +485,7 @@ const NavBar = () => {
               onChange={(event) => setSearh(event.target.value)}
             />
             <button
-              className="group px-6 py-[6.5px] ml-2 rounded-sm cursor-pointer hover:bg-wapicolor-600 border   bg-wapicolor-100 hover:text-luz border-white  "
+              className="group px-6 py-[6.5px] ml-2 rounded-sm cursor-pointer hover:bg-wapicolor-500 border-2 border-b-4 border-wapicolor-600  bg-luz hover:text-luz   "
               title="Buscar"
             >
               <SearchIcon className="text-wapicolor-600 group-hover:text-luz" />

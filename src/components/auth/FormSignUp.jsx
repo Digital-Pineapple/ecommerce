@@ -163,7 +163,7 @@ const FormSignUp = () => {
       <form onSubmit={formik.handleSubmit} className="w-full">
         <div className="mx-auto mt-10">
           <div className="">
-            <label className="uppercase mb-5 block">Nombre Completo</label>
+            <label className="uppercase mb-5 block text-wapicolor-600">Nombre Completo</label>
             <TextField
               type="text"
               name="fullname"
@@ -186,7 +186,7 @@ const FormSignUp = () => {
             />
           </div>
           <div className="">
-            <label className="uppercase my-5 block">Correo Electronico</label>
+            <label className="uppercase my-5 block text-wapicolor-600">Correo Electronico</label>
             <TextField
               type="email"
               name="email"
@@ -209,7 +209,7 @@ const FormSignUp = () => {
             />
           </div>
           <div className="">
-            <label className="uppercase my-5 block">Contraseña</label>
+            <label className="uppercase my-5 block text-wapicolor-600">Contraseña</label>
             <TextField
               type={showPassword.password ? "text" : "password"}
               name="password"
@@ -248,7 +248,7 @@ const FormSignUp = () => {
             />
           </div>
           <div className="">
-            <label className="uppercase my-5 block">Confirmar Contraseña</label>
+            <label className="uppercase my-5 block text-wapicolor-600">Confirmar Contraseña</label>
             <TextField
               type={showPassword.confirmPassword ? "text" : "password"}
               name="passwordConfirmation"
@@ -330,7 +330,7 @@ const FormSignUp = () => {
 
           <div className="mt-10">
             <button
-              className="bg-[#222] w-full text-white py-4 uppercase hover:bg-[#333] border-2 border-[#222] transition-all duration-700 ease-in-out"
+              className="bg-luz  w-full text-wapicolor-600 py-4 uppercase hover:bg-wapicolor-600  hover:text-luz  border-2 border-b-4 border-wapicolor-600 rounded-md transition-all duration-700 ease-in-out"
               type="submit"
             >
               Crear Cuenta

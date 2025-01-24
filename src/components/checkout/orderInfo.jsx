@@ -19,10 +19,10 @@ export const OrderInfo = () => {
     <table className="min-w-full leading-normal">
       <thead>
         <tr className="">
-          <th className="bg-[#333] px-5 py-3 border-b-2 border-gray-200 text-xs font-semibold text-[#fff] uppercase">
+          <th className="bg-wapicolor-600 px-5 py-3 border-b-2 border-gray-200 text-xs font-semibold text-[#fff] uppercase">
             Descripción
           </th>
-          <th className="bg-[#333] px-5 py-3 border-b-2 border-gray-200 text-xs font-semibold uppercase text-[#fff]">
+          <th className="bg-wapicolor-600 px-5 py-3 border-b-2 border-gray-200 text-xs font-semibold uppercase text-[#fff]">
             Total
           </th>
         </tr>

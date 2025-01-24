@@ -154,8 +154,8 @@ export const CheckoutForm = ({ setLoadingForm, cart }) => {
         {message && <div id="payment-message">{message}</div>}
         <button
           type="submit"
-          className="bg-[#333] text-luz py-[23px] px-[0px] w-full uppercase text-[15px] hover:bg-[#000] mt-5"
-          disabled={isLoading || (!stripe && !elements)}
+          className="bg-luz text-wapicolor-600 py-[23px] px-[0px] w-full uppercase text-[15px] hover:bg-wapicolor-600 hover:text-luz mt-5 border-2 border-b-4 border-wapicolor-600"
+          disabled={isLoading || !stripe && !elements}
           id="submit"
         >
           <span id="button-text">

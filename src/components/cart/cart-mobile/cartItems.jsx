@@ -64,7 +64,7 @@ export const CartItems = ({ product }) => {
         </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-        <IconButton onClick={() => removeProduct(product_id._id)}>
+        <IconButton onClick={() => removeProduct(product_id._id)} className="text-wapicolor-600"> 
           <DeleteIcon />
         </IconButton>
       </td>

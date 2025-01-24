@@ -162,7 +162,7 @@ export const FormSignIn = () => {
                     </Link>
                 </div>
                 <div>
-                    <button className="bg-[#222] w-full text-white py-4 uppercase hover:bg-[#333] border-2 border-[#222] transition-all duration-700 ease-in-out"
+                    <button className=" bg-luz w-full text-wapicolor-700 py-4 uppercase hover:bg-wapicolor-600 hover:text-luz border border-l-2 border-b-4 border-wapicolor-600  transition-all duration-700 ease-in-out rounded-md"
                         type="submit"
                     >
                         Iniciar Sesion

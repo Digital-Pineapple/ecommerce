@@ -24,7 +24,7 @@ const CouponDetails = ({ handleApplyCoupon, setInputCoupon, coupon, handleRemove
                                     className="py-2 border-2 broder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-900 px-2 w-full"
                                 />
                                 <button
-                                    className="w-full bg-[#222] py-2 text-white ml-2 w-4/12 border-2 border-[#222]"
+                                    className="w-full bg-luz hover:bg-wapicolor-600 hover:text-luz py-2 text-wapicolor-600 ml-2 w-4/12 border-2 border-b-4 border-wapicolor-600 rounded-md"
                                 >
                                     Aplicar
                                 </button>

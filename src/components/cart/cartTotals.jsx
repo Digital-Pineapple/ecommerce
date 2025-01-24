@@ -163,7 +163,7 @@ export const CartTotals = ({ toggleBusinessRule, toggleSelectCountry }) => {
             <ShippingAddress toggleSelectCountry={toggleSelectCountry} />
           </div>
 
-          <div className="w-full">
+          <div className="w-full b">
             <CouponDetails
               handleApplyCoupon={handleApplyCoupon}
               setInputCoupon={setInputCoupon}
@@ -175,8 +175,9 @@ export const CartTotals = ({ toggleBusinessRule, toggleSelectCountry }) => {
           <div className=" flex flex-wrap items-start pb-[33px] pt-[27px] justify-aound w-full">
             <TotalShoppingCart total={total} />
           </div>
-          <button
-            className="rounded-[25px] bg-[#333] w-[100%] h-[50px] font-Poppins text-[15px] leading-[1.4] uppercase text-[#fff] flex  items-center  justify-center hover:bg-[#000] hover:transition-all"
+          <button className="rounded-[25px] bg-luz w-[100%] h-[50px] font-Poppins text-[15px] leading-[1.4] uppercase text-wapicolor-600 flex  items-center  justify-center hover:bg-wapicolor-600 hover:transition-all
+          hover:text-luz
+          border-2 border-b-4 border-wapicolor-600"
             onClick={() => proceedToCheckout()}
             // onClick={handleSelectAddress}
           >
