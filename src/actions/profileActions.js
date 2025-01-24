@@ -459,8 +459,8 @@ export const loadFiscalAddress = (customer, state, municipality) => ({
   type: types.load_fiscal_address,
   payload: {
     customer,
-    // state,
-    // municipality,
+    state,
+    municipality,
   },
 });
 
