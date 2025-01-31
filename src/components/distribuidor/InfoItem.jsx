@@ -5,11 +5,11 @@ const InfoItem = ({ title, text, image }) => {
     return (
         <div className="my-10 md:my-20 w-full">
             <div className="flex items-center">
-                <div className="border-[#e91e63] rounded-full p-3 mx-4 shadow-2xl shadow-[#e91e63] flex justify-center items-center">
+                <div className="border-[#e91e63] rounded-lg  mx-4 shadow-lg shadow-[#e91e63] flex justify-center items-center">
                     <Image
                         src={image}
                         alt="distribuidor"
-                        width={150}
+                        width={180}
                         height={150}
                     />
                 </div>

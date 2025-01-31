@@ -140,7 +140,7 @@ const Show = () => {
               )}
             </div>
             <div className="mt-5 md:mt-0 p-2 md:pl-5 lg:pl-10">
-              <h1 className="text-[22px] font-Poppins font-normal capitalize leading-[1.5] text-[#212529]">
+              <h1 className="text-[22px] font-Poppins font-normal capitalize leading-[1.5] text-wapicolor-600">
                 {product?.name}
               </h1>
               <div className="mt-5">
@@ -160,7 +160,7 @@ const Show = () => {
                     {price}
                   </p>
                 </div>
-                <p className="mt-4 font-medium uppercase">
+                <p className="mt-4 font-medium uppercase text-wapicolor-600">
                   {product?.quantity} Disponibles
                 </p>
               </div>
@@ -290,8 +290,8 @@ const Show = () => {
               {product?.description || ""}
             </p>
           </div>
-          <div className="mb-[40px] text-center bg-[#f8f8f8] p-[15px]">
-            <h3 className="mb-0 inline-block relative pl-[20px]  text-[20px] font-semibold">
+          <div className="mb-[40px] text-center bg-pink-50 p-[15px] rounded-md border border-b-4 border-r-4 border-pink-600">
+            <h3 className="mb-0 inline-block relative pl-[20px]  text-[20px] font-semibold text-wapicolor-900">
               Productos Relacionados
             </h3>
           </div>

@@ -38,7 +38,7 @@ export const ProductSlider = ({
                     ))
                 }
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="grid grid-cols-2 space-x-2 md:grid-cols-3 lg:grid-cols-4">
                 {products?.map((product) => (
                     <ProductCard
                         key={product._id}
@@ -50,7 +50,7 @@ export const ProductSlider = ({
                 {
                     products.length > 0 && (
                         <div className="flex items-start mb-14 justify-center" onClick={showMore}>
-                            <div className="text-pink-600 border-2 border-[#e91e63] px-6 md:px-14 py-2 cursor-pointer hover:bg-[#e91e63] hover:text-white rounded-full flex flex-col items-center transition-all duration-700 ease-in-out text-xs md:text-xl">
+                            <div className="text-pink-600 border-2 border-wapicolor-600 px-6 md:px-14 py-2 cursor-pointer hover:bg-wapicolor-600 hover:text-white rounded-full flex flex-col items-center transition-all duration-700 ease-in-out text-xs md:text-xl">
                                 <span className="font-semibold">Ver más</span>
                             </div>
                         </div>

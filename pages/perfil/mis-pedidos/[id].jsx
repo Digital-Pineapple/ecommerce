@@ -131,7 +131,7 @@ const ShowOrder = () => {
         <div className="overflow-x-hidden">
           <div className=" overflow-x-auto">
             <table className="w-full text-sm text-left text-gray-500">
-              <thead className="text-xs text-white uppercase bg-[#333] dark:bg-gray-700 dark:text-gray-400">
+              <thead className="text-xs text-white uppercase bg-wapicolor-500 ">
                 <tr>
                   <th scope="col" className="py-3 px-6">
                     Nombre
@@ -286,7 +286,9 @@ const ShowOrder = () => {
                           <Image
                             src={payment.image}
                             alt={payment?.image}
-                            className="min-w-[6rem] min-h-[6rem] h-[6rem] w-[6rem]"
+                            height={96}
+                            width={96}
+                            // className="min-w-[6rem] min-h-[6rem] h-[6rem] w-[6rem]"
                           />
                         </picture>
                       </Zoom>

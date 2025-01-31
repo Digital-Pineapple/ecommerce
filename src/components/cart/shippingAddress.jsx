@@ -51,7 +51,16 @@ export const ShippingAddress = ({ toggleSelectCountry }) => {
                     Object.keys(addressSelected)?.length > 0 ? (
                         <p className="w-full font-semibold">{addressSelected.street} #{addressSelected.no_ext}, {addressSelected.postalcode}, {addressSelected?.state?.name}</p>
                     ) : (
-                        <FormControl size="small" fullWidth>
+                        <FormControl size="small" fullWidth  sx={{
+                            "& .MuiOutlinedInput-root": {
+                                "& fieldset": {
+                                    borderColor: "pink"
+                                },    "&:hover fieldset": {
+                                    borderColor: "pink", // Color del borde al pasar el mouse
+                                },
+                                }
+                            }}
+                            >
                             <InputLabel
                                 id="demo-simple-select-label">Dirección de envío</InputLabel>
                             <Select

@@ -79,6 +79,7 @@ export const ProductCard = memo(({ product }) => {
                         (max-width: 1200px) 50vw,
                         33vw"
               onClick={handleShowProduct}
+              className="rounded-md"
             />
           ) : (
             <Image
@@ -273,14 +274,16 @@ export const ProductCard = memo(({ product }) => {
                                      shadow-md 
                                      flex justify-center 
                                      items-center  
-                                     hover:bg-[#333] 
-                                     hover:transition"
+                                     hover:bg-wapicolor-100 
+                                     hover:transition
+                                     border-wapicolor-600
+                                     "
                 onClick={() => handleToogleWishList(_id)}
               >
                 {isInWhisList ? (
                   <FavoriteIcon className="text-[25px] left-40  space-x-16 text-red-600 w-[60%] z-[2] hover:text-red-600 hover:transition cursor-pointer" />
                 ) : (
-                  <FavoriteBorderIcon className="text-[25px] text-[#888] w-[60%] z-[2] hover:text-[#fff] hover:transition cursor-pointer" />
+                  <FavoriteBorderIcon className="text-[25px] text-wapicolor-600 w-[60%] z-[2] hover:text-[#fff] hover:transition cursor-pointer" />
                 )}
               </span>
             </div>
