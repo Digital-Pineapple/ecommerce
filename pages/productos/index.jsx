@@ -117,7 +117,19 @@ const Products = () => {
 
         <div className="col-span-4 md:col-span-2 lg:col-span-3">
           <div className={`grid grid-cols-2 lg:grid-cols-3 mb-20 mt-10`}>
-            <a
+
+            {products?.totalDocs > 0 ? (
+              products?.products?.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))
+            ) : (
+              <div className="text-center col-span-full">
+                <h4 className="text-2xl uppercase font-semibold mt-20 mb-10">
+                  No hay resultados para tu busqueda
+                </h4>
+              </div>
+            )}
+                        <a
               href="https://wa.me/7293222418?text=Hola, Estoy interesado en adquirir productos de su marca, me puedes proporcionar más detalles para comprar! "
               target="blank"
             >
@@ -134,17 +146,6 @@ const Products = () => {
                 }}
               />
             </a>
-            {products?.totalDocs > 0 ? (
-              products?.products?.map((product) => (
-                <ProductCard key={product._id} product={product} />
-              ))
-            ) : (
-              <div className="text-center col-span-full">
-                <h4 className="text-2xl uppercase font-semibold mt-20 mb-10">
-                  No hay resultados para tu busqueda
-                </h4>
-              </div>
-            )}
           </div>
           {(products.hasNextPage || products.hasPrevPage) && (
             <div className="flex justify-center my-10">
