@@ -152,7 +152,7 @@ const Footer = ({ categories }) => {
           <div className="w-full h-full flex items-center justify-center my-5">
             <span className="text-[12px] cursor-pointer">
               <a href="https://digital-pineapple.com.mx/" target="_blank" rel="noopener noreferrer">
-                ©Copyright 2022 By Digital Pinneapple
+                ©Copyright 2025 By Digital Pinneapple
               </a>
             </span>
           </div>

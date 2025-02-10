@@ -35,9 +35,9 @@ const BusinessRules = () => {
                 <div>
                     <table className="min-w-full leading-normal font-Poppins borfe border-collapse">
                         <thead>
-                        <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Compra mínima</th>
-                        <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Compra máxima</th>
-                        <th className="px-5 py-4 text-lg bg-[#333] text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Descuento</th>
+                        <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Compra mínima</th>
+                        <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Compra máxima</th>
+                        <th className="px-5 py-4 text-lg bg-wapicolor-600 text-xs font-semibold text-[#fff] uppercase tracking-wider text-center">Descuento</th>
                         </thead>
                         <tbody>
                         {

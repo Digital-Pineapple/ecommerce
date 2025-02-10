@@ -253,7 +253,7 @@ const NavBar = () => {
             />
           </span>
           <div className="flex items-center justify-center my-3 ">
-            <span className="items-center border-transparent border-b-2 cursor-pointer flex text-luz  font-['Poppins'] transition duration-700 ease-in-out lg:hidden">
+            <span className="items-center border-transparent border-b-2 cursor-pointer flex text-luz  font-['Poppins'] transition duration-700 ease-in-out lg:hidden ">
               {!router.pathname.includes("/perfil") &&
                 !router.pathname.includes("/checkout") &&
                 !router.pathname.includes("/distribuidor") && (
@@ -267,7 +267,7 @@ const NavBar = () => {
                 badgeContent={wishList?.length}
                 color="primary"
                 onClick={() => handleRedirectClick("/mi-lista-de-deseos")}
-                className="mx-2 hover:text-custom-blue"
+                className="mx-2 text-white hover:bg-white hover:text-wapicolor-600 p-1 rounded"
               >
                 <FavoriteBorderIcon />
               </Badge>
@@ -275,8 +275,13 @@ const NavBar = () => {
                 badgeContent={cart?.length}
                 color="primary"
                 onClick={() => handleRedirectClick("/mi-carrito")}
-                className="mr-5 hover:text-custom-blue"
-              >
+                className="mr-5  hover:bg-white hover:text-wapicolor-600 p-1 rounded"
+                componentsProps={{
+                  badge: {
+                    style: { backgroundColor: "#41cada", color: "white" }, // Estilo personalizado del badge
+                  },
+                }}
+                >
                 <ShoppingCartCheckoutIcon />
               </Badge>
             </span>

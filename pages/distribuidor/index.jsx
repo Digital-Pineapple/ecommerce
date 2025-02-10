@@ -42,13 +42,13 @@ const Distributor = () => {
           <div className="px-5">
             <div className="border-2 border-b-8 rounded-lg py-16 px-2 shadow-md flex flex-col items-center hover:bg-pink-200 cursor-pointer border-wapicolor-600 group">
               <Image
-                src="/assets/icons/logistic-truck-icon.svg"
+                src="/assets/icons/Logistics.png"
                 alt="Distribuidor"
-                width={120}
-                height={120}
+                width={200}
+                height={200}
               />
-              <h2 className="text-4xl mt-8 mb-10 font-bold text-center group-hover:text-luz">Convierte en distribuidor</h2>
-              <p className="text-center text-lg text-wapicolor-600 mb-10 px-4">
+              <h2 className="text-4xl mt-4 mb-4 font-bold text-center group-hover:text-luz">Convierte en distribuidor</h2>
+              <p className="text-center text-lg text-wapicolor-600 mb- px-4">
                 Forma parte de nuestra red de distribuidores y goza de los grandes beneficios que Wapizima tiene para ti.
               </p>
             </div>
@@ -99,42 +99,42 @@ const Distributor = () => {
             text={<p className="md:text-lg">
               Dirigite al apartado <Link href="/auth/register" passHref><b className="text-[#e91e63] cursor-pointer">REGISTRATE</b></Link>, Ingresa tus datos para poder crear tu perfil.
             </p>}
-            image="/assets/icons/user.png"
+            image="/assets/icons/Login.png"
           />
           <InfoItem
             title="Accede a ser distribuidor"
             text={<p className="md:text-lg">
               Observa los descuentos que tenemos para tí, en la tabla que se encuentra en la parte superior.
             </p>}
-            image="/assets/icons/delivery-truck-icon.svg"
+            image="/assets/icons/Truck.png"
           />
           <InfoItem
             title="Revisa nuestro catalogo"
             text={<p className="md:text-lg">
               Dirigete a nuestro apartado de <Link href="/productos" passHref><b className="text-[#e91e63] cursor-pointer">PRODUCTOS</b></Link>, ahí podrás observar todo nuestro catalogo que tenemos para tí.
             </p>}
-            image="/assets/icons/catalog.png"
+            image="/assets/icons/Catalogue.png"
           />
           <InfoItem
             title="Comienza a comprar"
             text={<p className="md:text-lg">
               Una vez revisado nuestro catalogo, agrega los productos de tu preferencia a tu carrito.
             </p>}
-            image="/assets/icons/add-cart.png"
+            image="/assets/icons/Cart.png"
           />
           <InfoItem
             title="Verifica tus pedidos"
             text={<p className="md:text-lg">
               Dentro de tu carrito verifica tus productos y sus cantidades. Si todo está bien deberas continuar.
             </p>}
-            image="/assets/icons/trolley.png"
+            image="/assets/icons/CartVerify.png"
           />
           <InfoItem
             title="Proceder a pagar"
             text={<p className="md:text-lg">
               Para pagar tendras 2 métodos de pago <b className="text-[#000]">(transferencia o pago con tarjeta)</b> y en el detalle de orden podras ver tus productos.
             </p>}
-            image="/assets/icons/wallet.png"
+            image="/assets/icons/Pay.png"
           />
         </div>
       </section>
