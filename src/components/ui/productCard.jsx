@@ -64,7 +64,7 @@ export const ProductCard = memo(({ product }) => {
   };
   const text = `Hola! Me interesa comprar producto de Merry Color, me puedes brindar información por favor!`;
   return (
-    <div className="mb-[30px] relative p-2 md:card animate__animated animate__zoomIn md:mx-2 shadow-md md:shadow-md border md:border-2 md:border-b-4 border-custom-pink rounded-xl">
+    <div className="mb-[30px] relative p-2 md:card animate__animated animate__zoomIn md:mx-2 shadow-md md:shadow-md  rounded-xl">
       <div className="relative overflow-hidden">
         <div className="w-full h-full relative cursor-pointer">
           {product.multimedia.length > 0 ? (
@@ -201,7 +201,7 @@ export const ProductCard = memo(({ product }) => {
                                   cursor-pointer 
                                   text-wapicolor-700 
                                   border-wapicolor-700 
-                                  border-[2px] 
+                                  border-[1px] 
                                   border-solid 
                                   leading-normal 
                                   rounded-lg 
@@ -210,8 +210,7 @@ export const ProductCard = memo(({ product }) => {
                                   text-[10px]
                                   md:text-[11px]
                                   lg:text-sm
-                                  hover:bg-wapicolor-700
-                                  hover:text-white
+                                  hover:bg-wapicolor-50/80
                                   transition-all duration-700 ease-in-out
                                   "
                                 >

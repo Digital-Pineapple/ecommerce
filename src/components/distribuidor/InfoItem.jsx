@@ -36,7 +36,7 @@ const InfoItem = ({ title, text, image }) => {
                     {/* Contenido de la tarjeta */}
                     <div className="relative h-full p-4 flex flex-col  justify-center ">
                         <div className='mb-4'>
-                            <h2 className="text-2xl font-bold  text-pink-600 uppercase">{title}</h2>
+                            <h2 className="text-2xl font-bold  text-pink-600 uppercase">{title}</h2> 
                         </div>
                         <div className="">
                         <p className="text-sm text-wapicolor-900 font-bold">

@@ -29,7 +29,7 @@ const Newsletter = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 px-5 items-center  ">
           <div className="w-full  md:px-2 py-1">
             <div className="relative overflow-hidden  rounded-lg ">
-            <div className="absolute inset-0 bg-wapicolor-700/80 blur "></div>
+            <div className="absolute inset-0 bg-wapicolor-600/80 blur "></div>
               <div className="relative z-10 p-4   rounded-lg">
                 <div className="mx-auto ">
                   <div className="w-full mb-4 md:px-2 ">
@@ -47,9 +47,9 @@ const Newsletter = () => {
           <div className="flex">
             <form onSubmit={formik.handleSubmit} className="w-full flex">
               <input name="email" type="text" placeholder="Ingresa tu correo electronico" value={formik.values.email}
-                onChange={formik.handleChange} className="bg-wapicolor-50 w-full py-4 px-10 text-sm leading-normal text-wapicolor-900  border border-b-4 border-wapicolor-500 rounded-none transition-all outline-wapicolor-400 placeholder-wapicolor-500 outline-2 " />
+                onChange={formik.handleChange} className="bg-gray-50 w-full py-4 px-10 text-sm leading-normal   border  rounded-none transition-all outline-wapicolor-400  outline-2 " />
 
-              <button type="submit" className="border border-b-4 rounded-md border-wapicolor-500 bg-white ml-2 lg:ml-5 text-wapicolor-400 px-2 md:px-5 text-[16px] transition-all hover:bg-wapicolor-600 hover:text-white hover:border-wapicolor-800">Suscribirme</button>
+              <button type="submit" className="border  rounded-md  bg-white ml-2 lg:ml-5 text-wapicolor-400 px-2 md:px-5 text-[16px] transition-all hover:bg-wapicolor-50 ">Suscribirme</button>
             </form>
           </div>
         </div>
