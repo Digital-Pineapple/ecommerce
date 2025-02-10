@@ -88,6 +88,7 @@ const FormSignUp = () => {
   const initialValues = {
     fullname: "",
     email: "",
+    phone_number: "",
     password: "",
     passwordConfirmation: "",
     policies: false,
@@ -100,6 +101,9 @@ const FormSignUp = () => {
     email: Yup.string()
       .email("El correo no tiene un valido")
       .required("El correo es requerido"),
+    phone_number: Yup.string()
+      .matches(/^\d{10}$/, "El número de teléfono debe tener 10 dígitos")
+      .required("El número de teléfono es requerido"),
     password: Yup.string()
       .min(8, "La contraseña debe contener al menos 8 caracteres")
       .required("La contraseña es requerida"),
@@ -125,6 +129,7 @@ const FormSignUp = () => {
         fullname: formData.fullname,
         email: formData.email,
         password: formData.password,
+        phone_number: formData.phone_number,
       };
       handelRegisterUser(data);
     },
@@ -160,16 +165,18 @@ const FormSignUp = () => {
   return (
     <>
       {loading && <LoadingScreen />}
-      <form onSubmit={formik.handleSubmit} className="w-full">
-        <div className="mx-auto mt-10">
-          <div className="">
-            <label className="uppercase mb-5 block text-wapicolor-600">Nombre Completo</label>
+      <form onSubmit={formik.handleSubmit} className='w-full'>
+        <div className='mx-auto mt-10'>
+          <div className=''>
+            <label className='uppercase mb-5 block text-wapicolor-600'>
+              Nombre Completo
+            </label>
             <TextField
-              type="text"
-              name="fullname"
+              type='text'
+              name='fullname'
               onChange={formik.handleChange}
-              placeholder="Tú Nombre"
-              label="Tu Nombre"
+              placeholder='Tú Nombre'
+              label='Tu Nombre'
               fullWidth
               required={true}
               error={
@@ -182,18 +189,20 @@ const FormSignUp = () => {
                 formik.errors.fullname &&
                 formik.errors.fullname
               }
-              autoComplete="off"
+              autoComplete='off'
             />
           </div>
-          <div className="">
-            <label className="uppercase my-5 block text-wapicolor-600">Correo Electronico</label>
+          <div className=''>
+            <label className='uppercase my-5 block text-wapicolor-600'>
+              Correo Electronico
+            </label>
             <TextField
-              type="email"
-              name="email"
-              label="Correo electrónico"
+              type='email'
+              name='email'
+              label='Correo electrónico'
               required={true}
               onChange={formik.handleChange}
-              placeholder="Correo electronico"
+              placeholder='Correo electronico'
               fullWidth
               error={
                 formik.touched.email && Boolean(formik.errors.email)
@@ -205,18 +214,46 @@ const FormSignUp = () => {
                 formik.errors.email &&
                 formik.errors.email
               }
-              autoComplete="off"
+              autoComplete='off'
             />
           </div>
-          <div className="">
-            <label className="uppercase my-5 block text-wapicolor-600">Contraseña</label>
+          <div className=''>
+            <label className='uppercase my-5 block text-wapicolor-600'>
+              Número de télefono
+            </label>
+            <TextField
+              type='phone_number'
+              name='phone_number'
+              label='Nímero Telefonico'
+              required={true}
+              onChange={formik.handleChange}
+              placeholder='Número Telefonico'
+              fullWidth
+              error={
+                formik.touched.phone_number &&
+                Boolean(formik.errors.phone_number)
+                  ? true
+                  : undefined
+              }
+              helperText={
+                formik.touched.phone_number &&
+                formik.errors.phone_number &&
+                formik.errors.phone_number
+              }
+              autoComplete='off'
+            />
+          </div>
+          <div className=''>
+            <label className='uppercase my-5 block text-wapicolor-600'>
+              Contraseña
+            </label>
             <TextField
               type={showPassword.password ? "text" : "password"}
-              name="password"
+              name='password'
               onChange={formik.handleChange}
-              label="Contraseña"
+              label='Contraseña'
               required={true}
-              placeholder="Tú contraseña"
+              placeholder='Tú contraseña'
               fullWidth
               error={
                 formik.touched.password && Boolean(formik.errors.password)
@@ -228,12 +265,12 @@ const FormSignUp = () => {
                 formik.errors.password &&
                 formik.errors.password
               }
-              autoComplete="off"
+              autoComplete='off'
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment position='end'>
                     <IconButton
-                      aria-label="toggle password visibility"
+                      aria-label='toggle password visibility'
                       onClick={() => handleClickShowPassword(1)}
                     >
                       {showPassword.password ? (
@@ -247,15 +284,17 @@ const FormSignUp = () => {
               }}
             />
           </div>
-          <div className="">
-            <label className="uppercase my-5 block text-wapicolor-600">Confirmar Contraseña</label>
+          <div className=''>
+            <label className='uppercase my-5 block text-wapicolor-600'>
+              Confirmar Contraseña
+            </label>
             <TextField
               type={showPassword.confirmPassword ? "text" : "password"}
-              name="passwordConfirmation"
+              name='passwordConfirmation'
               onChange={formik.handleChange}
-              label="Confirmar contraseña"
+              label='Confirmar contraseña'
               required={true}
-              placeholder="Tú contraseña"
+              placeholder='Tú contraseña'
               fullWidth
               error={
                 formik.touched.passwordConfirmation &&
@@ -268,13 +307,13 @@ const FormSignUp = () => {
                 formik.errors.passwordConfirmation &&
                 formik.errors.passwordConfirmation
               }
-              autoComplete="off"
+              autoComplete='off'
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="end">
+                  <InputAdornment position='end'>
                     <IconButton
-                      className="flex justify-end"
-                      aria-label="toggle password visibility"
+                      className='flex justify-end'
+                      aria-label='toggle password visibility'
                       onClick={handleClickShowPassword}
                     >
                       {showPassword.confirmPassword ? (
@@ -289,13 +328,13 @@ const FormSignUp = () => {
             />
           </div>
           {error && (
-            <span className="flex items-center mt-10 justify-center">
-              <ErrorIcon className="text-red-600 mr-1" />
-              <p className="text-red-600 text-sm">{messageError}</p>
+            <span className='flex items-center mt-10 justify-center'>
+              <ErrorIcon className='text-red-600 mr-1' />
+              <p className='text-red-600 text-sm'>{messageError}</p>
             </span>
           )}
 
-          <div className="flex flex-col">
+          <div className='flex flex-col'>
             <FormControlLabel
               control={
                 <Checkbox
@@ -315,27 +354,27 @@ const FormSignUp = () => {
               label={
                 <>
                   Acepto las{" "}
-                  <Link href="/Politicas_de_privacidad.pdf">
+                  <Link href='/Politicas_de_privacidad.pdf'>
                     Políticas de privacidad
                   </Link>
                 </>
               }
             />
             {formik.touched.policies && formik.errors.policies ? (
-              <span className="text-red-500 text-sm">
+              <span className='text-red-500 text-sm'>
                 {formik.errors.policies}
               </span>
             ) : null}
           </div>
 
-          <div className="mt-10">
+          <div className='mt-10'>
             <button
-              className="bg-luz  w-full text-wapicolor-600 py-4 uppercase hover:bg-wapicolor-600  hover:text-luz  border-2 border-b-4 border-wapicolor-600 rounded-md transition-all duration-700 ease-in-out"
-              type="submit"
+              className='bg-luz  w-full text-wapicolor-600 py-4 uppercase hover:bg-wapicolor-600  hover:text-luz  border-2 border-b-4 border-wapicolor-600 rounded-md transition-all duration-700 ease-in-out'
+              type='submit'
             >
               Crear Cuenta
             </button>
-            <div className="text-center text-gray-500 text-sm font-semibold my-3">
+            <div className='text-center text-gray-500 text-sm font-semibold my-3'>
               <Link
                 href={
                   router.query.p
@@ -343,22 +382,22 @@ const FormSignUp = () => {
                     : "/auth/login"
                 }
               >
-                <a className="hover:text-gray-900 transition-all duration-700 ease-out">
+                <a className='hover:text-gray-900 transition-all duration-700 ease-out'>
                   ¿Ya tienes Cuenta?
                 </a>
               </Link>
             </div>
           </div>
-          <div className="my-5">
-            <div className="flex items-center">
-              <hr className="w-full h-0.5 bg-gray-200 mr-2" />
-              <p className="text-gray-200 font-semibold">O</p>
-              <hr className="w-full h-0.5 bg-gray-200 ml-2" />
+          <div className='my-5'>
+            <div className='flex items-center'>
+              <hr className='w-full h-0.5 bg-gray-200 mr-2' />
+              <p className='text-gray-200 font-semibold'>O</p>
+              <hr className='w-full h-0.5 bg-gray-200 ml-2' />
             </div>
             <GoogleLogin
               clientId={process.env.NEXT_PUBLIC_GOOGLE_ID}
-              buttonText="Registrarme con Google"
-              className="w-full mt-5 py-3"
+              buttonText='Registrarme con Google'
+              className='w-full mt-5 py-3'
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               cookiePolicy={"single_host_origin"}
